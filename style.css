@@ -477,6 +477,10 @@ main, .fim { overflow-x: clip; }
   }
 
   .cabecalho { padding-top: 17px; }
+  .logo { gap: 10px; }
+  .logo-texto { gap: 6px; }
+  .logo-nome { font-size: 17px; line-height: 17px; letter-spacing: -0.085px; }
+  .logo-sub { font-size: 10px; line-height: 10px; letter-spacing: 0.1px; }
   .menu-toggle { display: flex; }
   .nav {
     display: none;
@@ -537,14 +541,6 @@ main, .fim { overflow-x: clip; }
   .hero-badge { --icone: 21.7px; }
   .hero-badge--quebra { --icone: 21.7px; }
   .hero-selos { display: none; }
-
-  .btn-cta {
-    gap: 16px;
-    padding: 6px 20px 6px 6px;
-    font-size: 16px;
-  }
-  .btn-cta__icone { width: 38px; height: 38px; }
-  .btn-cta__icone img { width: 19px; height: 19px; }
 }
 
 @media (min-width: 600px) and (max-width: 1023px) {
@@ -705,7 +701,6 @@ main, .fim { overflow-x: clip; }
   /* a linha com o itálico de 34px fica mais alta, como no Figma */
   .titulo-secao em { font-size: 34px; line-height: 1.56; }
   .texto-secao { font-size: 16px; }
-  .btn-cta--claro { padding: 6px 30px 5px 6px; }
 
   .dores {
     padding: 100px 0 60px;
@@ -1189,11 +1184,7 @@ main, .fim { overflow-x: clip; }
   .card-fase__painel p { padding-top: 7.73px; font-size: 12px; }
 
   .so-desktop { display: none; }
-  .fases .btn-cta {
-    margin-top: 36px;
-    padding-right: 27px;
-    box-shadow: 0 0 0 7px rgba(223, 226, 230, 0.28);
-  }
+  .fases .btn-cta { margin-top: 36px; }
 }
 
 /* ==========================================================================
@@ -1581,10 +1572,6 @@ main, .fim { overflow-x: clip; }
   .sobre-credenciais { gap: 12px; }
   .sobre-credenciais li { font-size: 12px; }
   .sobre-citacao blockquote { font-size: 18px; }
-  /* este botão mantém o tamanho do desktop no Figma mobile */
-  .sobre .btn-cta { padding: 6px 27px 6px 6px; font-size: 18px; }
-  .sobre .btn-cta__icone { width: 48px; height: 48px; }
-  .sobre .btn-cta__icone img { width: 24px; height: 24px; }
 }
 
 /* ==========================================================================
@@ -1730,7 +1717,6 @@ main, .fim { overflow-x: clip; }
   .depo-carrossel { margin-top: 36px; }
   .depo-card { padding: 24px 20px; }
   .depo-rodape { margin-top: 36px; }
-  .depo-rodape .btn-cta--claro { padding-bottom: 6px; }
 }
 @media (prefers-reduced-motion: reduce) {
   /* sem animação: o carrossel vira uma faixa com rolagem manual */
@@ -2117,7 +2103,6 @@ main, .fim { overflow-x: clip; }
   /* linhas na altura do itálico de 34px, que quebra entre a 2ª e a 3ª linha (102px no Figma) */
   .cta-card .titulo-secao { line-height: 40.8px; }
   .cta-card .titulo-secao em { font-size: 34px; line-height: 1; white-space: normal; }
-  .cta-card .btn-cta { padding-bottom: 6px; }
 }
 
 /* ==========================================================================
