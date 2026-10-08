@@ -2,40 +2,32 @@
 
 > Tatiane André Maiorga (CRP 06/141102) é psicóloga infantil e para adolescentes, especialista em Neuropsicologia, com atendimento presencial em Perdizes, São Paulo/SP, e online. Oferece psicoterapia com Terapia Cognitivo-Comportamental (TCC), avaliação neuropsicológica e reabilitação neuropsicológica, com a família orientada em cada etapa.
 
-## Para quem é
+O atendimento é para pais de crianças e adolescentes com dificuldades emocionais, de comportamento ou na escola: birras e crises, ansiedade e medos, atenção e aprendizagem, questões da adolescência (afastamento, tristeza, imagem corporal, telas, bullying) e mudanças na família (separação, luto, mudança de casa ou de escola, chegada de um irmão). Atende pré-escolares, escolares e adolescentes.
 
-- Pais de crianças e adolescentes com dificuldades emocionais, de comportamento ou na escola.
-- Situações comuns: birras e crises, ansiedade e medos, atenção e aprendizagem, questões da adolescência (afastamento, tristeza, imagem corporal, telas, bullying) e mudanças na família (separação, luto, mudança de casa ou de escola, chegada de um irmão).
-- Fases atendidas: pré-escolares (educação infantil), escolares (ensino fundamental) e adolescentes.
+Pais e responsáveis participam do processo com escuta, orientação para a rotina e continuidade em casa, respeitando a idade, as necessidades e a privacidade de quem está em atendimento. O atendimento é particular (não há convênio) e os valores são informados pelo WhatsApp antes de qualquer agendamento.
+
+Para agendar: mandar uma mensagem pelo WhatsApp com a idade do filho, tirar as dúvidas sobre valores, modalidade e horários, e o primeiro atendimento começa pelo acolhimento dos pais.
+
+## Site
+
+- [Página inicial](https://tatianemaiorga.vercel.app/): apresentação, para quem é o atendimento e as situações mais comuns.
+- [Como funciona](https://tatianemaiorga.vercel.app/#como-funciona): os três passos, da primeira mensagem ao primeiro atendimento.
+- [Sobre a Tatiane](https://tatianemaiorga.vercel.app/#sobre-mim): formação, credenciais e forma de trabalho.
+- [Serviços](https://tatianemaiorga.vercel.app/#como-posso-ajudar): psicoterapia, avaliação e reabilitação neuropsicológica.
+- [Dúvidas frequentes](https://tatianemaiorga.vercel.app/#duvidas): valores, convênio, duração, presencial ou online e primeira sessão com crianças pequenas.
 
 ## Serviços
 
-- **Psicoterapia:** para lidar com emoções e comportamento. Usa a Terapia Cognitivo-Comportamental; com os pequenos, brincadeiras e jogos fazem parte do processo.
-- **Avaliação neuropsicológica:** para entender atenção, aprendizagem e desenvolvimento. Pode fazer parte da investigação de TDAH, TEA e dificuldades de aprendizagem, conforme a indicação de cada caso.
-- **Reabilitação neuropsicológica:** acompanhamento com estratégias organizadas para o perfil da criança e para os objetivos definidos com a família, com reflexos em casa e na escola.
-
-## A família no processo
-
-Pais e responsáveis participam com escuta, orientação para a rotina e continuidade em casa, respeitando a idade, as necessidades e a privacidade de quem está em atendimento.
-
-## Como agendar
-
-1. Mandar uma mensagem pelo WhatsApp informando a idade do filho (não é preciso contar o caso por mensagem).
-2. Tirar dúvidas sobre valores, modalidade (presencial ou online) e horários disponíveis.
-3. O primeiro atendimento começa pelo acolhimento: escuta dos pais e início do conhecimento da criança, com definição conjunta dos próximos passos.
-
-## Dúvidas frequentes
-
-- **Quanto custa?** O valor depende do serviço e é informado pelo WhatsApp antes de qualquer agendamento, sem compromisso.
-- **Atende por convênio?** Não. O atendimento é particular.
-- **Quanto tempo dura o acompanhamento?** Depende da necessidade da criança e dos objetivos definidos em conjunto.
-- **Presencial ou online?** As duas modalidades; a mais adequada depende do serviço e das necessidades da criança.
-- **E se meu filho é pequeno e não sabe explicar o que sente?** Ele não precisa explicar: com crianças pequenas o processo é lúdico, e os pais também são ouvidos.
+- [Psicoterapia](https://tatianemaiorga.vercel.app/#como-posso-ajudar): para lidar com emoções e comportamento, com Terapia Cognitivo-Comportamental; com os pequenos, brincadeiras e jogos fazem parte do processo.
+- [Avaliação neuropsicológica](https://tatianemaiorga.vercel.app/#como-posso-ajudar): para entender atenção, aprendizagem e desenvolvimento; pode fazer parte da investigação de TDAH, TEA e dificuldades de aprendizagem.
+- [Reabilitação neuropsicológica](https://tatianemaiorga.vercel.app/#como-posso-ajudar): estratégias organizadas para o perfil da criança e os objetivos definidos com a família.
 
 ## Contato
 
-- WhatsApp: +55 (11) 96844-5868 — https://wa.me/5511968445868
-- Instagram: https://www.instagram.com/psicologa_tatiane_maiorga/
-- Consultório: Rua Padre Chico, 221 — Conjunto 206, Perdizes, São Paulo/SP, CEP 05008-010
-- Empresa: Tatiane Maiorga Psicologia e Neuropsicologia Ltda - ME (CNPJ 53.846.377/0001-22)
-- Site: https://tatianemaiorga.vercel.app/
+- [WhatsApp (11) 96844-5868](https://wa.me/5511968445868): agendamento e dúvidas sobre valores, modalidade e horários.
+- [Instagram @psicologa_tatiane_maiorga](https://www.instagram.com/psicologa_tatiane_maiorga/): perfil profissional.
+- [Consultório em Perdizes](https://www.google.com/maps/search/?api=1&query=Rua+Padre+Chico%2C+221%2C+Perdizes%2C+S%C3%A3o+Paulo+-+SP%2C+05008-010): Rua Padre Chico, 221 — Conjunto 206, Perdizes, São Paulo/SP, CEP 05008-010. Tatiane Maiorga Psicologia e Neuropsicologia Ltda - ME, CNPJ 53.846.377/0001-22.
+
+## Optional
+
+- [Mapa do site](https://tatianemaiorga.vercel.app/sitemap.xml): lista das páginas para buscadores.
