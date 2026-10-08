@@ -1,0 +1,2272 @@
+/* ==========================================================================
+   Fontes (auto-hospedadas, do Google Fonts — licença SIL Open Font License 1.1)
+   Subconjunto "latin": cobre todo o português. Ambas são fontes variáveis.
+   ========================================================================== */
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: block; /* espera a fonte (arquivo local, carrega em ms) em vez de piscar com a fonte reserva */
+  src: url("assets/fonts/montserrat-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Newsreader";
+  font-style: italic;
+  font-weight: 400;
+  font-display: block; /* espera a fonte (arquivo local, carrega em ms) em vez de piscar com a fonte reserva */
+  src: url("assets/fonts/newsreader-italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ==========================================================================
+   Design tokens
+   ========================================================================== */
+:root {
+  --azul: #0a55ae;
+  --ciano: #0898c4;
+  --texto: #1e2733;
+  --texto-80: rgba(30, 39, 51, 0.8);
+  --cinza: #46505e;
+  --cinza-logo: #4a4e55;
+  --cinza-logo-sub: #5e636b;
+  --areia: #f6f2ec;
+  --gelo: #edf2f7;
+  --azul-gelo: #ebf1f6;
+  --borda-botao: #dfe2e6;
+  --marinho: #0b2a4f;
+  --branco: #fff;
+
+  --grad-cta: linear-gradient(84deg, #0a55ae 1.59%, #1a62b6 33.5%, #4987cd 68.45%, #0d5ab4 99.25%);
+
+  --fonte: "Montserrat", system-ui, sans-serif;
+  --fonte-serif: "Newsreader", Georgia, serif;
+
+  --container: 1280px;
+  --gutter: 20px;
+  --u: 1px; /* escala das composições desktop (1px = Figma) */
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--fonte);
+  color: var(--texto);
+  background: var(--branco);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { font: inherit; border: 0; background: none; cursor: pointer; }
+
+.container {
+  width: min(var(--container), 100% - var(--gutter) * 2);
+  margin-inline: auto;
+}
+/* corta na horizontal as ondas e enfeites mais largos que a tela (sem criar rolagem lateral);
+   "clip" mantém a vertical livre e não cria contêiner de rolagem */
+main, .fim { overflow-x: clip; }
+
+/* ==========================================================================
+   Componentes compartilhados
+   ========================================================================== */
+
+/* Botão CTA (gradiente + ícone do WhatsApp) */
+.btn-cta {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 16px;
+  padding: 6px 27px 6px 6px;
+  border-radius: 999px;
+  background: var(--grad-cta);
+  box-shadow: 0 0 0 7px var(--borda-botao);
+  color: var(--branco);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.4;
+  white-space: nowrap;
+  transition: filter 0.2s;
+}
+.btn-cta:hover { filter: brightness(1.08); }
+.btn-cta__icone {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--branco);
+}
+.btn-cta__icone img { width: 24px; height: 24px; }
+/* text-box: o Figma mede o texto da altura das maiúsculas até a linha de base */
+.btn-cta__texto { text-box: trim-both cap alphabetic; }
+
+/* telas muito estreitas (até 400px): o texto do botão quebra em vez de sair da tela */
+@media (max-width: 400px) {
+  .btn-cta { max-width: 100%; white-space: normal; }
+}
+
+/* Variante clara, usada sobre fundos azuis */
+.btn-cta--claro {
+  padding-right: 30px;
+  background: linear-gradient(#fff, #eef4fb);
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.54);
+  color: var(--azul);
+}
+.btn-cta--claro .btn-cta__icone { background: var(--azul); }
+
+/* Reflexo dos botões CTA: faixa de luz a cada 5s (passagem de ~1,2s) */
+[data-tm-shine] {
+  position: relative;
+  overflow: hidden;
+}
+[data-tm-shine]::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 34%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
+  pointer-events: none;
+  transform: translateX(-160%) skewX(-20deg); /* fora do botão durante o atraso */
+  animation: tm-shine 5s ease-in-out infinite;
+  animation-delay: var(--tm-atraso, 1s);
+}
+.btn-cta--claro[data-tm-shine]::after {
+  background: linear-gradient(90deg, transparent, rgba(10, 85, 174, 0.16), transparent);
+}
+@keyframes tm-shine {
+  0%       { transform: translateX(-160%) skewX(-20deg); }
+  24%,100% { transform: translateX(420%) skewX(-20deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-tm-shine]::after { animation: none !important; display: none; }
+}
+
+/* Cabeçalho de seção */
+.eyebrow {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: 1.75px;
+  text-transform: uppercase;
+  color: var(--azul);
+  text-box: trim-both cap alphabetic;
+}
+.titulo-secao {
+  margin-top: 24px;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1.2;
+  text-box: trim-both cap alphabetic;
+}
+.texto-secao {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--texto-80);
+  text-box: trim-both cap alphabetic;
+}
+/* trecho em itálico azul dos títulos */
+.titulo-secao em { white-space: nowrap; } /* não quebra o destaque entre linhas */
+.hero-titulo em,
+.titulo-secao em {
+  line-height: 1; /* evita que a Newsreader aumente a altura da linha */
+  font-family: var(--fonte-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--azul);
+}
+
+/* ==========================================================================
+   1. Header + Hero
+   ========================================================================== */
+.topo {
+  position: relative;
+  overflow: hidden;
+  background: var(--areia);
+}
+/* foto do consultório desfocada ao fundo */
+.topo::before {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  background: url("assets/hero-fundo.webp") center / cover no-repeat;
+  opacity: 0.07;
+  filter: blur(5.8px);
+  pointer-events: none;
+}
+/* onda de transição para a próxima seção */
+.topo::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  z-index: 3;
+  width: 4617.72px;
+  height: 79px;
+  translate: -50% 0;
+  background: url("assets/onda-hero.svg") 0 0 / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+/* Header */
+.cabecalho {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  padding-top: 19px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: none;
+}
+.logo-simbolo { width: 58px; height: 45.42px; }
+.logo-texto { display: flex; flex-direction: column; gap: 8px; }
+.logo-nome {
+  font-weight: 500;
+  font-size: 23px;
+  line-height: 23px;
+  letter-spacing: -0.115px;
+  color: var(--cinza-logo);
+  text-box: trim-both cap alphabetic;
+}
+.logo-sub {
+  font-size: 13px;
+  line-height: 13px;
+  letter-spacing: 0.13px;
+  color: var(--cinza-logo-sub);
+  text-box: trim-both cap alphabetic;
+}
+
+.nav {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 168px;
+}
+.menu {
+  display: flex;
+  gap: 20px;
+  padding: 10px 20px; /* + 1px de borda = 11px/21px do Figma */
+  border: 1px solid rgba(10, 85, 174, 0.08);
+  border-radius: 999px;
+  background: rgba(237, 242, 247, 0.85);
+  backdrop-filter: blur(4px);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 14px;
+  white-space: nowrap;
+}
+.menu a {
+  display: block;
+  text-box: trim-both cap alphabetic;
+  transition: color 0.2s;
+}
+.menu a:hover { color: var(--azul); }
+
+.btn-agendar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 50px;
+  padding: 0 7px 0 24px;
+  border-radius: 999px;
+  background: var(--azul);
+  color: var(--branco);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 15px;
+  white-space: nowrap;
+  transition: filter 0.2s;
+}
+.btn-agendar:hover { filter: brightness(1.12); }
+.btn-agendar__icone {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--branco);
+}
+.btn-agendar__icone img { width: 20.39px; height: 20.39px; }
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 35.9px;
+  height: 35.9px;
+  margin-left: auto;
+  border-radius: 8.2px;
+  background: var(--azul);
+}
+.menu-toggle span {
+  width: 19.95px;
+  height: 3px;
+  border-radius: 1px;
+  background: var(--branco);
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  height: 766px; /* 835 do Figma menos os 69 do header */
+}
+.hero-conteudo {
+  position: relative;
+  z-index: 2;
+  width: 630px;
+  padding-top: 140px;
+}
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--cinza);
+  white-space: nowrap;
+}
+.hero-eyebrow span { text-box: trim-both cap alphabetic; }
+.hero-eyebrow__sep {
+  width: 1.24px;
+  height: 13.1px;
+  background: var(--ciano);
+}
+.hero-titulo {
+  margin-top: 24px;
+  font-weight: 500;
+  font-size: 50px;
+  line-height: 1.2;
+  text-box: trim-both cap alphabetic;
+}
+.hero-sub {
+  width: 506px;
+  margin-top: 40px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--texto-80);
+  text-box: trim-both cap alphabetic;
+}
+.hero-conteudo .btn-cta { margin-top: 40px; }
+
+/* Composição da foto: medidas do Figma multiplicadas por --u */
+.hero-visual {
+  position: absolute;
+  right: calc(-11.04 * var(--u));
+  bottom: calc(-3.67 * var(--u));
+  width: calc(668 * var(--u));
+  height: calc(711.33 * var(--u));
+}
+.hero-anel {
+  position: absolute;
+  inset: 0 0 auto;
+  height: calc(668 * var(--u));
+  border: max(1.044 * var(--u), 0.5px) dashed rgba(10, 85, 174, 0.28);
+  border-radius: 50%;
+}
+.hero-foto {
+  position: absolute;
+  left: calc(35.49 * var(--u));
+  top: calc(35.49 * var(--u));
+  width: calc(597.03 * var(--u));
+  height: calc(597.03 * var(--u));
+  max-width: none;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.hero-recorte {
+  position: absolute;
+  left: calc(35.5 * var(--u));
+  top: calc(-34.67 * var(--u));
+  width: calc(597.03 * var(--u));
+  height: calc(746 * var(--u));
+  max-width: none;
+}
+.hero-badge {
+  --tam: 66.8;
+  --icone: 31.31px;
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: calc(var(--tam) * var(--u));
+  height: calc(var(--tam) * var(--u));
+  border-radius: calc(20.875 * var(--u));
+  background: var(--branco);
+  box-shadow: 0 calc(14.613 * var(--u)) calc(15.656 * var(--u)) rgba(11, 42, 79, 0.12);
+}
+.hero-badge img { width: var(--icone); height: var(--icone); }
+.hero-badge--cerebro  { left: calc(32.36 * var(--u));  top: calc(101.24 * var(--u)); }
+.hero-badge--conversa { left: calc(611.64 * var(--u)); top: calc(192.05 * var(--u)); }
+.hero-badge--quebra   { left: 0; top: calc(457.16 * var(--u)); --tam: 58.45; --icone: 27.14px; }
+
+.hero-selos {
+  position: absolute;
+  right: 0;
+  bottom: 67px;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+.selo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px 12px 12px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(5.8px);
+}
+.selo__icone {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--gelo);
+}
+.selo__icone img { width: 21px; height: 21px; }
+.selo__texto {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--cinza);
+  white-space: nowrap;
+  text-box: trim-both cap alphabetic;
+}
+.selo__texto strong {
+  display: block;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+/* Desktop estreito: o hero encolhe na proporção do container */
+@media (min-width: 1024px) and (max-width: 1319px) {
+  :root { --u: calc((100vw - 40px) / 1280); }
+  .nav { padding-left: 32px; }
+  .hero-conteudo { width: calc(630 * var(--u)); }
+  .hero-titulo { font-size: calc(50 * var(--u)); }
+  .hero-sub { width: max(420px, 506 * var(--u)); font-size: max(16px, 18 * var(--u)); }
+}
+
+/* Tablet e mobile: layout empilhado (Figma mobile 420px) */
+@media (max-width: 1023px) {
+  .topo { --u: 0.4718px; }
+  .topo::after {
+    width: 1827.62px;
+    height: 33px;
+    background-image: url("assets/onda-hero-mobile.svg");
+  }
+
+  .cabecalho { padding-top: 17px; }
+  .menu-toggle { display: flex; }
+  .nav {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    padding: 16px;
+    border-radius: 16px;
+    background: var(--branco);
+    box-shadow: 0 14px 32px rgba(11, 42, 79, 0.12);
+  }
+  .cabecalho.aberto .nav { display: flex; }
+  .menu {
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    backdrop-filter: none;
+    font-size: 16px;
+  }
+  .menu a { padding: 14px 4px; text-box: none; }
+  .btn-agendar { justify-content: space-between; }
+
+  .hero {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-conteudo {
+    width: 100%;
+    max-width: 560px;
+    padding-top: 70.6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .hero-eyebrow { gap: 7px; font-size: 12px; }
+  /* linhas com o itálico de 34px ditam a altura (34 × 1.2) */
+  .hero-titulo { font-size: 28px; line-height: 40.8px; }
+  .hero-titulo em { font-size: 34px; }
+  .hero-sub { width: auto; margin-top: 32px; font-size: 16px; }
+  .hero-conteudo .btn-cta { margin-top: 32px; }
+
+  .hero-visual {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    flex: none;
+    margin: 65.5px 0 -4.2px;
+  }
+  .hero-badge { --icone: 21.7px; }
+  .hero-badge--quebra { --icone: 21.7px; }
+  .hero-selos { display: none; }
+
+  .btn-cta {
+    gap: 16px;
+    padding: 6px 20px 6px 6px;
+    font-size: 16px;
+  }
+  .btn-cta__icone { width: 38px; height: 38px; }
+  .btn-cta__icone img { width: 19px; height: 19px; }
+}
+
+@media (min-width: 600px) and (max-width: 1023px) {
+  .topo { --u: 0.62px; }
+}
+
+/* ==========================================================================
+   2. Dores
+   ========================================================================== */
+.dores {
+  position: relative;
+  padding: 80px 0;
+  background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1920 978' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect width='100%' height='100%' fill='url(%23g)'/><defs><radialGradient id='g' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-96 87.131 -171.05 -183.93 960 80.512)'><stop stop-color='%23edf2f7'/><stop offset='1' stop-color='%23e9f0f6'/></radialGradient></defs></svg>") 0 0 / 100% 100%;
+}
+/* onda de transição para "Como funciona" */
+.dores::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 3267.5px;
+  height: 45px;
+  translate: -50% 0;
+  background: url("assets/onda-dores.svg") 0 0 / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+.cabecalho-duplo {
+  display: flex;
+  align-items: flex-end;
+  gap: 36px;
+}
+.cabecalho-duplo > div { flex: 1; }
+.cabecalho-duplo .texto-secao { flex: none; width: 506px; }
+
+.dores-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 40px;
+}
+.dores-linha {
+  display: grid;
+  grid-template-columns: 738fr 522fr;
+  gap: 20px;
+}
+.dores-linha--3 { grid-template-columns: repeat(3, 1fr); }
+
+.card-dor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 32px;
+  border-radius: 22px;
+  background: var(--branco);
+  box-shadow: 0 1px 1px rgba(30, 39, 51, 0.04);
+}
+.card-dor__icone { width: 52px; height: 52px; padding: 9px; }
+.card-dor h3 {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--azul);
+  text-box: trim-both cap alphabetic;
+}
+.card-dor p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--texto-80);
+  text-box: trim-both cap alphabetic;
+}
+.card-dor__rodape { position: relative; }
+.card-dor__rodape button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 12.5px;
+  color: var(--azul);
+  white-space: nowrap;
+}
+.card-dor__rodape img { width: 18px; height: 18px; }
+.card-dor__rodape button span { text-box: trim-both cap alphabetic; }
+
+/* Tooltip "O que os pais dizem" (abre via .aberta, controlado no script.js) */
+.dica {
+  position: absolute;
+  left: -10px;
+  bottom: calc(100% + 12px);
+  z-index: 10;
+  width: 250px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: var(--marinho);
+  box-shadow: 0 18px 36px -16px rgba(11, 42, 79, 0.55);
+  font-family: var(--fonte-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.35;
+  color: var(--branco);
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  translate: 0 6px;
+  /* ao fechar, esconde só depois do fade */
+  transition: opacity 0.2s ease, translate 0.2s ease, visibility 0s linear 0.2s;
+}
+.dica::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  bottom: -6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--marinho);
+  rotate: 45deg;
+}
+.card-dor__rodape.aberta .dica {
+  visibility: visible;
+  opacity: 1;
+  translate: 0 0;
+  transition: opacity 0.25s ease-out, translate 0.25s ease-out, visibility 0s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dica { transition: none !important; translate: none; }
+}
+
+.dores-faixa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 40px;
+  padding: 32px;
+  border-radius: 24px;
+  background: linear-gradient(121.57deg, #0f4c8f 0%, #0b3b73 50%, #082c57 100%);
+}
+.dores-faixa p {
+  flex: 0 1 556px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+  text-box: trim-both cap alphabetic;
+}
+.dores-faixa em {
+  font-family: var(--fonte-serif);
+  font-size: 24px;
+  color: #8fd3ee;
+}
+
+@media (max-width: 1023px) {
+  .titulo-secao { font-size: 28px; }
+  /* a linha com o itálico de 34px fica mais alta, como no Figma */
+  .titulo-secao em { font-size: 34px; line-height: 1.56; }
+  .texto-secao { font-size: 16px; }
+  .btn-cta--claro { padding: 6px 30px 5px 6px; }
+
+  .dores {
+    padding: 100px 0 60px;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 420 1841' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect width='100%' height='100%' fill='url(%23g)'/><defs><radialGradient id='g' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-21 164.02 -37.418 -346.22 210 151.56)'><stop stop-color='%23edf2f7'/><stop offset='1' stop-color='%23e9f0f6'/></radialGradient></defs></svg>");
+  }
+  .dores::after { display: none; }
+  .cabecalho-duplo { flex-direction: column; align-items: stretch; }
+  .cabecalho-duplo .texto-secao { width: auto; }
+  .dores-cards { margin-top: 36px; }
+  .dores-linha,
+  .dores-linha--3 { grid-template-columns: 1fr; }
+  .card-dor { padding: 20px; }
+
+  .dores-faixa {
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 36px;
+    padding: 28px 20px;
+    text-align: center;
+    background: linear-gradient(96.76deg, #0f4c8f 0%, #0b3b73 50%, #082c57 100%);
+  }
+  .dores-faixa p { flex: none; font-size: 16px; }
+  .dores-faixa em { font-size: 20px; line-height: 1.4; }
+}
+
+/* ==========================================================================
+   3. Como Funciona
+   ========================================================================== */
+.como-funciona {
+  position: relative;
+  padding: 82px 0 84px;
+  background: var(--areia);
+}
+/* onda de transição para "Para cada fase" (só sobe do lado esquerdo) */
+.como-funciona::after {
+  content: "";
+  position: absolute;
+  left: calc(50% - 1522px);
+  bottom: 0;
+  width: 2426.5px;
+  height: 45px;
+  background: url("assets/onda-como-funciona.svg") 0 0 / 100% 100% no-repeat;
+  pointer-events: none;
+}
+.como-funciona .container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+}
+
+.cf-foto {
+  position: relative;
+  flex: none;
+  width: calc(521.66 * var(--u));
+  height: calc(780 * var(--u));
+}
+/* moldura azul atrás da foto */
+.cf-foto::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(229 * var(--u));
+  width: calc(351 * var(--u));
+  height: calc(551 * var(--u));
+  border-radius: 28px;
+  background: #dce7f2;
+}
+.cf-foto img {
+  position: absolute;
+  left: calc(32 * var(--u));
+  top: 0;
+  width: calc(489.66 * var(--u));
+  height: calc(748 * var(--u));
+  max-width: none;
+  border-radius: 28px;
+  background: #e9e2d8;
+  object-fit: cover;
+  object-position: 52% 50%;
+}
+
+.cf-conteudo {
+  flex: 0 1 630px;
+  min-width: 0;
+  margin: 15px 0 0 calc(128.34 * var(--u));
+}
+.cf-conteudo .eyebrow,
+.cf-conteudo .titulo-secao,
+.cf-conteudo > .texto-secao { max-width: 522px; }
+.cf-conteudo .titulo-secao { margin-top: 28px; }
+/* itálico maior (45px): a linha cresce como no Figma */
+.cf-conteudo .titulo-secao em { font-size: 45px; line-height: 1.5; }
+.cf-conteudo > .texto-secao { max-width: 506px; margin-top: 40px; }
+
+.etapas {
+  margin-top: 40px;
+  max-width: 591px;
+  list-style: none;
+}
+.etapa {
+  --sombra-numero: var(--azul);
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 37px;
+}
+.etapa--2 { --sombra-numero: #0b76ba; }
+/* linha que liga os números */
+.etapa:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 23px;
+  top: 48px;
+  bottom: 0;
+  width: 2px;
+  background: var(--azul);
+}
+/* a linha vai sendo preenchida conforme o scroll, medida pelo meio da tela
+   (navegadores sem suporte mostram a linha cheia, como no Figma) */
+@supports (animation-timeline: view()) {
+  .etapa {
+    view-timeline: --etapa block;
+    view-timeline-inset: 50% 50%;
+  }
+  .etapa:not(:last-child)::before {
+    background: linear-gradient(var(--azul), var(--azul)) 0 0 / 100% 0% no-repeat rgba(10, 85, 174, 0.15);
+    animation: preencher-linha linear both;
+    animation-timeline: --etapa;
+    animation-range: cover 48px cover 100%;
+  }
+}
+@keyframes preencher-linha { to { background-size: 100% 100%; } }
+.etapa__numero {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  padding-top: 15px;
+  border-radius: 10px;
+  background: var(--azul);
+  box-shadow: 0 0 0 7px rgba(10, 85, 174, 0.08), 0 10px 20px -10px var(--sombra-numero);
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 17px;
+  text-align: center;
+  color: var(--branco);
+}
+.etapa__conteudo {
+  flex: 1;
+  padding-bottom: 32px;
+  line-height: 1.5;
+}
+.etapa:last-child .etapa__conteudo { padding-bottom: 0; }
+.etapa__rotulo {
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 1.54px;
+  text-transform: uppercase;
+  color: var(--ciano);
+  text-box: trim-both cap alphabetic;
+}
+.etapa h3 {
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 1.5;
+  text-box: trim-both cap alphabetic;
+}
+.etapa__texto {
+  margin-top: 24px;
+  font-size: 15.5px;
+  color: var(--texto-80);
+  text-box: trim-both cap alphabetic;
+}
+
+.cf-rodape {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+.cf-apoio {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--texto-80);
+  white-space: nowrap;
+  text-box: trim-both cap alphabetic;
+}
+.cf-apoio span { display: block; }
+
+@media (max-width: 1023px) {
+  .como-funciona { padding: 60px 0; }
+  .como-funciona::after { display: none; }
+  .como-funciona .container { flex-direction: column; align-items: stretch; gap: 40px; }
+
+  .cf-foto { width: auto; height: 418.84px; margin-left: -1px; }
+  .cf-foto::before {
+    top: 16.41px;
+    width: 67.3%;
+    height: 402.43px;
+    border-radius: 20.45px;
+  }
+  .cf-foto img {
+    left: auto;
+    right: 0;
+    width: calc(100% - 20px);
+    height: 400px;
+    border-radius: 20.45px;
+    object-position: 50% 50%;
+  }
+
+  .cf-conteudo { flex: none; margin: 0; }
+  .cf-conteudo .titulo-secao em { font-size: 34px; line-height: 1.56; }
+  .cf-conteudo > .texto-secao { margin-top: 36px; }
+
+  .etapas { margin-top: 36px; }
+  .etapa { gap: 24px; }
+  .etapa h3 { font-size: 16px; }
+  .etapa__texto { margin-top: 20px; font-size: 14px; }
+
+  .cf-rodape { flex-direction: column; align-items: flex-start; margin-top: 36px; }
+  .cf-apoio { font-size: 14px; white-space: normal; }
+  .cf-apoio span { display: inline; }
+  .cf-apoio span + span::before { content: "- "; }
+}
+
+/* ==========================================================================
+   4. Para Cada Fase
+   ========================================================================== */
+.fases {
+  position: relative;
+  z-index: 1;           /* cantos arredondados ficam por cima da próxima seção */
+  margin-bottom: -55px; /* e avançam 55px sobre ela, como no Figma */
+  padding: 80px 0 83px;
+  border-radius: 0 0 40px 40px;
+  background: var(--branco);
+}
+.fases .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.fases-cabecalho {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.fases-cabecalho .titulo-secao em { font-size: 44px; }
+.fases-cabecalho .texto-secao { width: 506px; max-width: 100%; margin-top: 36px; }
+
+.fases-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  margin-top: 40px;
+}
+.card-fase {
+  --curva: cubic-bezier(0.2, 0.7, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #f7f4ef;
+  transition: transform 0.3s var(--curva), box-shadow 0.3s ease;
+}
+@media (hover: hover) and (min-width: 1024px) {
+  .card-fase:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px -22px rgba(11, 42, 79, 0.18);
+  }
+}
+.card-fase__foto {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  flex: 1 0 265px; /* cresce para ocupar a sobra do card, sem deixar vão */
+  margin: 10px 10px 0;
+  padding: 20px;
+  overflow: hidden;
+  border-radius: 20px;
+  transition: flex-basis 0.45s var(--curva);
+}
+.card-fase.aberto .card-fase__foto { flex-basis: 112px; }
+.card-fase__foto > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card-fase__selos {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.card-fase__icone {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(4px);
+}
+.card-fase__icone img { width: 34px; height: 34px; }
+.card-fase__etiqueta {
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 6px 16px -8px rgba(11, 42, 79, 0.35);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 1.32px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-box: trim-both cap alphabetic;
+}
+
+.card-fase__conteudo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 20px;
+}
+.card-fase h3 {
+  font-family: var(--fonte-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.2;
+  color: var(--azul);
+  text-box: trim-both cap alphabetic;
+}
+.card-fase__sub {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  text-box: trim-both cap alphabetic;
+}
+.card-fase__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 372px; /* quebra as tags nas mesmas linhas do Figma */
+  list-style: none;
+}
+.card-fase__tags li {
+  padding: 9px 13px;
+  border-radius: 99px;
+  background: var(--branco);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--texto-80);
+  white-space: nowrap;
+  text-box: trim-both cap alphabetic;
+}
+/* "Como o atendimento acontece": abre/fecha (classe .aberto no script.js) */
+.card-fase__mais {
+  margin-top: auto; /* alinha os blocos quando os cards têm alturas diferentes */
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--branco);
+}
+.card-fase__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  font-weight: 600;
+  font-size: 11.5px;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--azul);
+}
+.card-fase__sinal {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--branco);
+  color: var(--azul);
+  transition: rotate 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+.card-fase__sinal svg { width: 16px; height: 16px; fill: currentColor; }
+.card-fase.aberto .card-fase__sinal { rotate: 45deg; background: var(--azul); color: var(--branco); }
+
+.card-fase__painel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+  transition: grid-template-rows 0.45s var(--curva), opacity 0.4s ease, visibility 0s linear 0.45s;
+}
+.card-fase.aberto .card-fase__painel {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+  transition: grid-template-rows 0.45s var(--curva), opacity 0.4s ease, visibility 0s;
+}
+.card-fase__painel > div { min-height: 0; overflow: hidden; }
+.card-fase__painel p {
+  padding-top: 10px;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--cinza);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-fase,
+  .card-fase__foto,
+  .card-fase__painel,
+  .card-fase__sinal { transition: none !important; }
+}
+
+.fases .btn-cta { margin-top: 40px; }
+
+@media (max-width: 1023px) {
+  .fases {
+    margin-bottom: -60px;
+    padding: 60px 0;
+  }
+  .fases-cabecalho .titulo-secao em { font-size: 34px; }
+  .fases-cabecalho .texto-secao { width: auto; }
+
+  /* carrossel horizontal, de borda a borda da tela */
+  .fases-cards {
+    display: flex;
+    align-self: stretch;
+    width: auto;
+    margin: 36px calc(var(--gutter) * -1) 0;
+    padding-inline: var(--gutter);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+  .fases-cards::-webkit-scrollbar { display: none; }
+  .card-fase {
+    flex: none;
+    width: 319.36px;
+    border-radius: 15.465px;
+    scroll-snap-align: start;
+  }
+  .card-fase__foto {
+    flex-basis: 204.91px;
+    margin: 7.733px 7.733px 0;
+    padding: 15.465px;
+    border-radius: 15.465px;
+  }
+  .card-fase__etiqueta {
+    padding: 6.959px 10.826px;
+    backdrop-filter: blur(3.09px);
+    box-shadow: 0 4.64px 12.37px -6.19px rgba(11, 42, 79, 0.35);
+    letter-spacing: 1.02px;
+  }
+  .card-fase__conteudo { gap: 18.558px; padding: 18.558px 15.465px; }
+  .card-fase h3 { font-size: 24px; }
+  .card-fase__sub { font-size: 14px; }
+  .card-fase__tags { gap: 7.733px; max-width: none; }
+  .card-fase__tags li { padding: 6.959px 10.052px; font-size: 12px; }
+  /* bloco que expande na escala dos cards mobile do Figma (×0,773),
+     assim o texto aberto ocupa o espaço que a foto libera e a página não pula */
+  .card-fase__mais { padding: 10.83px 12.37px; border-radius: 10.83px; }
+  .card-fase__toggle { font-size: 9.28px; letter-spacing: 1.07px; }
+  .card-fase__sinal { width: 21.65px; height: 21.65px; }
+  .card-fase__sinal svg { width: 12.37px; height: 12.37px; }
+  .card-fase__painel p { padding-top: 7.73px; font-size: 12px; }
+
+  .so-desktop { display: none; }
+  .fases .btn-cta {
+    margin-top: 36px;
+    padding-right: 27px;
+    box-shadow: 0 0 0 7px rgba(223, 226, 230, 0.28);
+  }
+}
+
+/* ==========================================================================
+   5. Família no Processo
+   ========================================================================== */
+.familia {
+  position: relative;
+  padding: 134px 0 80px;
+  background:
+    url("data:image/svg+xml;utf8,<svg viewBox='0 0 2056.4 829' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect width='100%' height='100%' fill='url(%23g)'/><defs><radialGradient id='g' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-75.242 76.795 -127.79 -125.2 1780.6 61.051)'><stop stop-color='rgba(246,242,236,0.5)'/><stop offset='1' stop-color='rgba(246,242,236,0.92549)'/></radialGradient></defs></svg>") 50% 0 / 2056.4px 100% no-repeat,
+    linear-gradient(var(--branco), var(--branco)) 50% 0 / 2056.4px 100% no-repeat, /* o degradê é translúcido sobre branco */
+    #f7f3ed; /* fora dos 2056px (telas muito largas): cor da borda do degradê */
+}
+/* retrato da Tatiane em tons de cinza, bem apagado, à esquerda */
+.familia::before {
+  content: "";
+  position: absolute;
+  left: -223.14px;
+  top: 0;
+  width: 790px;
+  height: 829px;
+  background: url("assets/familia-retrato.webp") 0 0 / 100% 100% no-repeat;
+  pointer-events: none;
+}
+.familia .container {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.familia-conteudo {
+  flex: 0 1 665px;
+  min-width: 0;
+  margin-top: 16px;
+}
+.familia .titulo-secao { margin-top: 28px; }
+.familia-conteudo > .texto-secao { margin-top: 32px; font-size: 17px; }
+
+.familia-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 32px;
+  list-style: none;
+}
+.familia-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.7);
+}
+.familia-item__icone {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--gelo);
+}
+.familia-item__icone img { width: 24px; height: 24px; }
+.familia-item > div { flex: 1; min-width: 0; }
+.familia-item h3 {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.5;
+  text-box: trim-both cap alphabetic;
+}
+.familia-item p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--texto-80);
+  text-box: trim-both cap alphabetic;
+}
+.familia-item div p { margin-top: 16px; }
+.familia-item--nota { background: rgba(255, 255, 255, 0.4); }
+.familia-item--nota .familia-item__icone { width: 32px; height: 32px; border-radius: 10px; }
+.familia-item--nota .familia-item__icone img { width: 17px; height: 17px; }
+.familia-item--nota > p { max-width: 506px; }
+
+.familia-foto {
+  position: relative;
+  flex: none;
+  width: calc(522 * var(--u));
+  height: calc(615 * var(--u));
+}
+/* moldura azul atrás da foto */
+.familia-foto::before {
+  content: "";
+  position: absolute;
+  left: calc(146.17 * var(--u));
+  top: calc(196.8 * var(--u));
+  width: calc(375.83 * var(--u));
+  height: calc(418.2 * var(--u));
+  border-radius: 28px;
+  background: #dce7f2;
+}
+.familia-foto__quadro {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(500 * var(--u));
+  height: calc(597 * var(--u));
+  overflow: hidden;
+  border-radius: 28px;
+  background: #e9e2d8;
+}
+/* recorte do Figma: foto deslocada 3,11% para cima; altura proporcional (sem esticar) */
+.familia-foto__quadro img {
+  position: absolute;
+  left: 0;
+  top: -3.11%;
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+
+@media (max-width: 1023px) {
+  .familia {
+    padding: 120px 0 61px;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 435 1360' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect width='100%' height='100%' fill='url(%23g)'/><defs><radialGradient id='g' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-15.916 125.98 -27.031 -205.4 376.66 100.16)'><stop stop-color='rgba(246,242,236,0.5)'/><stop offset='1' stop-color='rgba(246,242,236,0.92549)'/></radialGradient></defs></svg>");
+    background-size: 100% 100%;
+  }
+  .familia::before { display: none; }
+  .familia .container { flex-direction: column; align-items: stretch; }
+
+  .familia-foto {
+    order: -1;
+    width: auto;
+    height: 352.94px;
+  }
+  .familia-foto::before {
+    left: auto;
+    right: 0;
+    top: 47.7px;
+    width: 72%;
+    height: 305.23px;
+    border-radius: 20.437px;
+  }
+  .familia-foto__quadro {
+    width: calc(100% - 16px);
+    height: 340px;
+    border-radius: 20.437px;
+  }
+  .familia-foto__quadro img { top: 0; height: 100%; object-fit: cover; }
+
+  .familia-conteudo { flex: none; margin-top: 0; }
+  /* no Figma mobile o destaque quebra entre as linhas e é maior (36px) */
+  .familia .titulo-secao { line-height: 48.4px; } /* altura das duas linhas igual ao Figma (68px) */
+  .familia .titulo-secao em { font-size: 36px; line-height: 1; white-space: normal; }
+  .familia-conteudo > .texto-secao { font-size: 16px; }
+  .familia-item h3 { font-size: 16px; }
+  .familia-item--nota > p { flex: 1; max-width: none; }
+}
+
+/* ==========================================================================
+   6. Faixa de Credenciais
+   ========================================================================== */
+.faixa {
+  --faixa-duracao: 40s;
+  display: flex;
+  align-items: center;
+  height: 56px;
+  overflow: hidden;
+  background: linear-gradient(90deg, #08468f, #0a55ae 50%, #0b76ba);
+}
+.faixa__trilho {
+  display: flex;
+  flex: none;
+  animation: faixa-rolar var(--faixa-duracao) linear infinite;
+}
+/* cada lista = um ciclo de 1511px (6 itens + separadores); o trilho anda uma lista e recomeça */
+.faixa__lista {
+  display: flex;
+  flex: none;
+  gap: 28px;
+  padding-right: 28px;
+  list-style: none;
+}
+.faixa__lista li {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-family: var(--fonte-serif);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 20px;
+  color: var(--branco);
+  white-space: nowrap;
+}
+.faixa__lista li span { text-box: trim-both cap alphabetic; }
+.faixa__lista li::after {
+  content: "";
+  width: 20px;
+  height: 10px;
+  background: url("assets/separador-faixa.svg") 0 0 / 100% 100% no-repeat;
+}
+@keyframes faixa-rolar {
+  to { translate: -50% 0; }
+}
+
+@media (max-width: 1023px) {
+  /* no Figma mobile a faixa começa deslocada 750px */
+  .faixa__trilho { animation-delay: calc(var(--faixa-duracao) * -750 / 1511); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faixa__trilho { animation: none; }
+}
+@media (prefers-reduced-motion: reduce) and (max-width: 1023px) {
+  .faixa__trilho { translate: -750px 0; }
+}
+
+/* ==========================================================================
+   7. Sobre Mim
+   ========================================================================== */
+.sobre {
+  position: relative;
+  /* corta o "Tatiane" gigante na borda da seção; "clip" (e não "hidden")
+     para não virar contêiner de rolagem e não quebrar a citação animada pelo scroll */
+  overflow: clip;
+  padding: 80px 0;
+  background: #eff4f9;
+}
+/* "Tatiane" decorativo ao fundo */
+.sobre-marca {
+  position: absolute;
+  left: calc(50% - 1103px);
+  bottom: -103px;
+  font-family: var(--fonte-serif);
+  font-style: italic;
+  font-size: 708.056px;
+  line-height: 708.056px;
+  letter-spacing: -14.161px;
+  color: rgba(10, 85, 174, 0.04);
+  white-space: nowrap;
+  pointer-events: none;
+  text-box: trim-both cap alphabetic;
+}
+.sobre .container {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+
+.sobre-galeria {
+  position: relative;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: calc(20 * var(--u));
+  width: calc(522 * var(--u));
+}
+.sobre-foto {
+  position: relative;
+  height: calc(313 * var(--u));
+  overflow: hidden;
+  border-radius: 27px;
+}
+/* recortes do Figma: largura e deslocamento da foto dentro da moldura;
+   a altura segue a proporção da imagem (height: auto), então nunca deforma */
+.sobre-foto img { position: absolute; max-width: none; height: auto; }
+.sobre-foto--1 img { left: 0; top: -9.76%; width: 100%; }
+.sobre-foto--2 img { left: -21.69%; top: -3.26%; width: 121.75%; }
+
+/* selo circular entre as fotos */
+.sobre-selo {
+  position: absolute;
+  left: calc(287.88 * var(--u));
+  top: calc(250.88 * var(--u));
+  width: calc(143.4 * var(--u));
+  aspect-ratio: 1;
+}
+.sobre-selo img {
+  position: absolute;
+  left: 12.76%;
+  top: 11.74%;
+  width: 76.53%;
+  height: 76.53%;
+}
+.sobre-selo svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.sobre-selo text {
+  font-family: var(--fonte);
+  font-weight: 400;
+  font-size: 5.5px;
+  white-space: pre;
+  fill: var(--branco);
+}
+
+.sobre-conteudo {
+  flex: 0 1 585px;
+  min-width: 0;
+  margin: 28px 0 0 calc(128 * var(--u));
+}
+.sobre .titulo-secao { margin-top: 28px; }
+.sobre .titulo-secao em { font-size: 45px; line-height: 1.5; }
+.sobre-credenciais {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 28px;
+  list-style: none;
+}
+.sobre-credenciais li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 999px;
+  background: var(--branco);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.sobre-credenciais img { width: 17px; height: 17px; }
+.sobre-credenciais span { text-box: trim-both cap alphabetic; }
+.sobre-bio { margin-top: 28px; font-size: 16px; }
+.sobre-citacao {
+  margin-top: 28px;
+  padding: 10px 20px;
+  border-left: 1px solid var(--ciano);
+}
+.sobre-citacao blockquote {
+  font-family: var(--fonte-serif);
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1.5;
+  text-box: trim-both cap alphabetic;
+}
+/* citação "lida" com o scroll: cada palavra começa clara e escurece em sequência
+   (palavras separadas pelo script.js; sem suporte, o texto fica na cor final) */
+@supports (animation-timeline: view()) {
+  .sobre-citacao blockquote { view-timeline: --citacao block; }
+  .sobre-citacao .palavra {
+    color: rgba(30, 39, 51, 0.2);
+    animation: ler-palavra linear both;
+    animation-timeline: --citacao;
+    animation-range:
+      contain calc(10% + 40% * var(--i) / var(--n))
+      contain calc(10% + 40% * (var(--i) + 1) / var(--n));
+  }
+}
+@keyframes ler-palavra { to { color: var(--texto); } }
+@media (prefers-reduced-motion: reduce) {
+  .sobre-citacao .palavra { animation: none; color: var(--texto); }
+}
+.sobre-citacao figcaption {
+  margin-top: 20px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--azul);
+  text-box: trim-both cap alphabetic;
+}
+.sobre .btn-cta { margin-top: 28px; }
+
+@media (max-width: 1023px) {
+  .sobre { padding: 60px 0 89.36px; }
+  .sobre-marca {
+    left: -51.2px;
+    bottom: 0;
+    font-size: 198.073px;
+    line-height: 198.073px;
+    letter-spacing: -3.9615px;
+  }
+  .sobre .container { flex-direction: column; align-items: stretch; gap: 40px; }
+
+  .sobre-galeria { width: auto; gap: 14.636px; margin-left: -1px; }
+  .sobre-foto { border-radius: 19.759px; }
+  .sobre-foto--1 { height: 175px; }
+  .sobre-foto--1 img { top: -9.46%; }
+  .sobre-foto--2 { height: 170px; }
+  .sobre-foto--2 img { top: -4.6%; }
+  /* ancorado pela direita: em 420px fica em x=231 como no Figma e não sai da tela nas menores */
+  .sobre-selo { left: auto; right: 45.2px; top: 128px; width: 104.82px; }
+
+  .sobre-conteudo { flex: none; margin: 0; }
+  /* no Figma mobile o destaque quebra entre as linhas (como no hero) */
+  .sobre .titulo-secao { line-height: 40.8px; }
+  .sobre .titulo-secao em { font-size: 34px; line-height: 1; white-space: normal; }
+  .sobre-credenciais { gap: 12px; }
+  .sobre-credenciais li { font-size: 12px; }
+  .sobre-citacao blockquote { font-size: 18px; }
+  /* este botão mantém o tamanho do desktop no Figma mobile */
+  .sobre .btn-cta { padding: 6px 27px 6px 6px; font-size: 18px; }
+  .sobre .btn-cta__icone { width: 48px; height: 48px; }
+  .sobre .btn-cta__icone img { width: 24px; height: 24px; }
+}
+
+/* ==========================================================================
+   8. Depoimentos
+   ========================================================================== */
+.depoimentos {
+  --depo-card: 413px;
+  --depo-x: 1072.5px;  /* início da lista em relação ao centro da tela (como no Figma) */
+  --depo-s: 2165px;    /* largura de uma lista: 5 × (card + 20px) */
+  --depo-duracao: 50s;
+  position: relative;
+  padding: 80px 0;
+  background: linear-gradient(#0d3462, #0b2a4f 55%, #09223f);
+}
+/* "abinha" com seta no topo da seção */
+.depoimentos::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -29px;
+  width: 96px;
+  height: 29px;
+  translate: -50% 0;
+  background: url("assets/seta-depoimentos.svg") 0 0 / 100% 100% no-repeat;
+}
+
+.depo-cabecalho {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.depo-selo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: var(--branco);
+  font-size: 14px;
+  white-space: nowrap;
+}
+.depo-selo img:first-child { width: 20px; height: 20px; }
+.depo-selo img + strong + img { width: 69.01px; height: 10.5px; }
+.depo-selo strong { font-weight: 600; line-height: 15px; text-box: trim-both cap alphabetic; }
+.depo-selo span { font-weight: 500; line-height: 13px; color: #5e6673; text-box: trim-both cap alphabetic; }
+/* padding: o itálico de 45px é mais alto que a linha de 40px (30px no Figma em vez de 28px) */
+.depoimentos .titulo-secao { margin-top: 33px; padding-top: 2px; color: var(--branco); }
+.depoimentos .titulo-secao em { font-size: 45px; color: #5fbfe3; }
+
+/* carrossel contínuo */
+.depo-carrossel {
+  margin-top: 40px;
+  overflow: hidden;
+}
+.depo-trilho {
+  display: flex;
+  width: max-content;
+  margin-left: calc(50% - var(--depo-x));
+}
+.depo-trilho.rolando {
+  margin-left: calc(50% - var(--depo-x) - var(--depo-s));
+  animation: depo-rolar var(--depo-duracao) linear infinite;
+}
+@keyframes depo-rolar {
+  to { translate: calc(var(--depo-s) * -1) 0; }
+}
+@media (hover: hover) {
+  .depo-trilho.rolando:hover { animation-play-state: paused; }
+}
+.depo-lista {
+  display: flex;
+  flex: none;
+  gap: 20px;
+  padding-right: 20px;
+  list-style: none;
+}
+.depo-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: none;
+  width: var(--depo-card);
+  padding: 32px;
+  border-radius: 20px;
+  background: var(--branco);
+  box-shadow: 0 1px 1px rgba(30, 39, 51, 0.04);
+}
+.depo-card__topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 20px;
+}
+.depo-card__topo img { width: 99.01px; height: 20px; }
+.depo-card__topo span { font-size: 12.5px; line-height: 12.5px; color: #7a828e; }
+.depo-card__texto {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #2b3440;
+  text-box: trim-both cap alphabetic;
+}
+.depo-card__autor { display: flex; align-items: center; gap: 12px; }
+.depo-card__avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #0b3b73;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 15px;
+  color: var(--branco);
+}
+.depo-card__nome {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18.2px;
+  text-box: trim-both cap alphabetic;
+}
+.depo-card__origem {
+  margin-top: 10px;
+  font-size: 12.5px;
+  line-height: 16.25px;
+  color: #5e6673;
+  text-box: trim-both cap alphabetic;
+}
+
+.depo-rodape { display: flex; justify-content: center; margin-top: 40px; }
+
+@media (max-width: 1023px) {
+  .depoimentos {
+    --depo-card: 294px;
+    --depo-x: 775.5px;
+    --depo-s: 1570px;
+    --depo-duracao: 36s;
+    padding: 60px 0;
+  }
+  .depoimentos .titulo-secao { padding-top: 0; }
+  .depoimentos .titulo-secao em { font-size: 36px; line-height: 1.5; }
+  .depo-carrossel { margin-top: 36px; }
+  .depo-card { padding: 24px 20px; }
+  .depo-rodape { margin-top: 36px; }
+  .depo-rodape .btn-cta--claro { padding-bottom: 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* sem animação: o carrossel vira uma faixa com rolagem manual */
+  .depo-carrossel { overflow-x: auto; }
+  .depo-trilho.rolando { animation: none; }
+}
+
+/* ==========================================================================
+   9. Serviços
+   ========================================================================== */
+.servicos {
+  position: relative;
+  padding: 80px 0;
+  background: var(--branco);
+}
+/* curva escura que continua o fundo dos Depoimentos (vetor do Figma girado 180°) */
+.servicos::before {
+  content: "";
+  position: absolute;
+  left: calc(50% - 1254px);
+  top: 0;
+  width: 2426.5px;
+  height: 45px;
+  rotate: 180deg;
+  background: url("assets/onda-servicos.svg") 0 0 / 100% 100% no-repeat;
+  pointer-events: none;
+}
+.servicos .container { position: relative; }
+.servicos .titulo-secao em { font-size: 45px; line-height: 1.5; }
+
+.servicos-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+.card-servico {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  border: 1px solid rgba(30, 33, 51, 0.1);
+  border-radius: 20px;
+  background: var(--branco);
+}
+.card-servico__icone {
+  display: grid;
+  place-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #f3f7fc, #e3ecf6);
+}
+.card-servico__icone img { width: 34px; height: 34px; }
+.card-servico h3 {
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.5;
+  text-box: trim-both cap alphabetic;
+}
+.card-servico__sub {
+  margin-top: 14px;
+  font-family: var(--fonte-serif);
+  font-style: italic;
+  /* abaixo de 18px o Figma não alarga a Newsreader pelo tamanho óptico (usa o padrão, 18) */
+  font-optical-sizing: none;
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--azul);
+  text-box: trim-both cap alphabetic;
+}
+.card-servico__texto {
+  max-width: 345px; /* quebra as linhas nos mesmos pontos do Figma */
+  margin-top: 30px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--texto-80);
+  text-box: trim-both cap alphabetic;
+}
+/* tags sempre no pé do card, a pelo menos 30px do texto */
+.card-servico__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 30px;
+  list-style: none;
+}
+.card-servico__tags li {
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: var(--gelo);
+  font-weight: 500;
+  font-size: 12.5px;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-box: trim-both cap alphabetic;
+}
+.card-servico--destaque {
+  border-color: #0b3b73;
+  border-radius: 24px;
+  background: linear-gradient(161.67deg, #0f4c8f 0%, #0b3b73 55%, #082c57 100%);
+  color: var(--branco);
+}
+.card-servico--destaque .card-servico__icone { background: var(--branco); }
+.card-servico--destaque .card-servico__sub { color: #8fd3ee; }
+.card-servico--destaque .card-servico__texto { color: rgba(255, 255, 255, 0.8); }
+.card-servico--destaque .card-servico__tags li { background: rgba(255, 255, 255, 0.1); }
+
+.servicos-rodape {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 40px;
+}
+.servicos-rodape p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--texto-80);
+  text-box: trim-both cap alphabetic;
+}
+
+@media (max-width: 1023px) {
+  .servicos { padding: 60px 0; }
+  .servicos::before { display: none; }
+  .servicos .cabecalho-duplo { align-items: center; text-align: center; }
+  .servicos .titulo-secao em { font-size: 35px; line-height: 1.56; }
+
+  .servicos-cards { grid-template-columns: 1fr; margin-top: 36px; }
+  .card-servico { padding: 28px 20px; }
+  .card-servico h3 { font-size: 20px; }
+  .card-servico__sub { font-size: 15px; }
+  .card-servico--destaque .card-servico__tags { padding-top: 20px; }
+
+  .servicos-rodape {
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 36px;
+    text-align: center;
+  }
+}
+
+/* ==========================================================================
+   10. Dúvidas Frequentes
+   ========================================================================== */
+.faq {
+  padding: 83px 0;
+  border-radius: 40px 40px 0 0;
+  background: #f0f4f9;
+}
+.faq-cabecalho {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+/* padding: o itálico de 45px é mais alto que a linha de 40px (30px no Figma) */
+.faq .titulo-secao { padding-top: 2px; }
+.faq .titulo-secao em { font-size: 45px; }
+
+.faq-conteudo {
+  display: flex;
+  align-items: stretch;
+  gap: 60px;
+  margin-top: 50px;
+}
+.faq-lista {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Pergunta (acordeão) */
+.faq-item {
+  padding: 17px 20px;
+  border: 1px solid rgba(10, 85, 174, 0.1);
+  border-radius: 16px;
+  background: var(--branco);
+  transition: background-color 0.3s ease;
+}
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  list-style: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary span { text-box: trim-both cap alphabetic; transition: color 0.3s ease; }
+.faq-item summary img { flex: none; width: 28px; height: 28px; }
+.faq-item__fechar { display: none; }
+.faq-item p {
+  padding-top: 20px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+  text-box: trim-both cap alphabetic;
+}
+.faq-item[open] { background: var(--azul); }
+.faq-item[open] summary span { color: var(--branco); }
+.faq-item[open] .faq-item__abrir { display: none; }
+.faq-item[open] .faq-item__fechar { display: block; }
+/* abre e fecha deslizando (navegadores que suportam; nos outros, abre direto) */
+@supports selector(::details-content) {
+  .faq-lista { interpolate-size: allow-keywords; }
+  .faq-item::details-content {
+    block-size: 0;
+    /* clip + margem: corta na animação sem cortar as letras que descem da linha (g, p, ç) */
+    overflow: clip;
+    overflow-clip-margin: 8px;
+    transition: block-size 0.35s ease, content-visibility 0.35s allow-discrete;
+  }
+  .faq-item[open]::details-content { block-size: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-item, .faq-item summary span, .faq-item::details-content { transition: none !important; }
+}
+
+/* Card de contato */
+.faq-contato {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  width: 414px;
+  padding: 32px;
+  border: 1px solid rgba(30, 33, 51, 0.1);
+  border-radius: 20px;
+  background: var(--branco);
+}
+.faq-contato__perfil { display: flex; align-items: center; gap: 14px; }
+.faq-contato__avatar { position: relative; flex: none; width: 64px; height: 64px; }
+.faq-contato__avatar > img { width: 64px; height: 64px; border-radius: 50%; }
+.faq-contato__badge {
+  position: absolute;
+  right: -4px;
+  bottom: -2px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--branco);
+  border-radius: 50%;
+  background: var(--azul);
+}
+.faq-contato__badge img { width: 15.59px; height: 15.59px; }
+.faq-contato__nome { font-weight: 600; font-size: 15px; line-height: 18px; }
+.faq-contato__status { margin-top: 4px; font-size: 13px; line-height: 16.9px; color: #5e6673; }
+.faq-contato__titulo {
+  margin-top: 30px;
+  padding-top: 2.4px; /* o itálico de 32px é mais alto que a linha de 28px */
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.2;
+  text-box: trim-both cap alphabetic;
+}
+.faq-contato__titulo em {
+  font-family: var(--fonte-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--azul);
+}
+.faq-contato__texto {
+  margin-top: 30px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--texto-80);
+  text-box: trim-both cap alphabetic;
+}
+.faq-contato .btn-cta { align-self: flex-start; margin-top: auto; }
+
+@media (max-width: 1023px) {
+  /* no Figma mobile o fundo azul-claro tem 968px e termina no meio do card de contato */
+  .faq {
+    padding: 60px 0;
+    background: linear-gradient(#f0f4f9, #f0f4f9) 0 0 / 100% 968px no-repeat, var(--branco);
+  }
+  /* no Figma o espaço antes do itálico também tem 34px e deixa a 1ª linha mais alta (título com 65px) */
+  .faq .titulo-secao { padding-top: 0; line-height: 41px; }
+  .faq .titulo-secao em { font-size: 34px; }
+  .faq-conteudo { flex-direction: column; gap: 38px; margin-top: 38px; }
+  .faq-contato { width: auto; }
+  .faq-contato__titulo { padding-top: 0; }
+  .faq-contato__titulo em { line-height: 1.5; } /* "dúvidas?" na 2ª linha, que fica mais alta (60px no Figma) */
+  .faq-contato .btn-cta { margin-top: 32px; }
+}
+
+/* ==========================================================================
+   Entradas ao rolar
+   (.revela no <html> é ligada no <head>; o script.js marca e revela os blocos)
+   ========================================================================== */
+[data-revela] { --rx: 0px; --ry: 28px; }
+[data-revela="esq"] { --rx: -48px; --ry: 0px; }
+[data-revela="dir"] { --rx: 48px; --ry: 0px; }
+@media (max-width: 1023px) {
+  [data-revela="esq"],
+  [data-revela="dir"] { --rx: 0px; --ry: 28px; }
+}
+.revela [data-revela]:not(.visivel) { opacity: 0; }
+.revela [data-revela].visivel,
+.revela [data-revela="esq"].visivel img,
+.revela [data-revela="dir"].visivel img {
+  animation: revela 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 90ms); /* itens que entram juntos vêm em sequência */
+}
+.revela [data-revela="esq"].visivel img,
+.revela [data-revela="dir"].visivel img { animation-name: revela-zoom; }
+.revela [data-revela="selo"].visivel { animation-name: revela-selo; animation-duration: 1.1s; }
+@keyframes revela { from { opacity: 0; translate: var(--rx) var(--ry); } }
+@keyframes revela-zoom { from { scale: 1.08; } }
+@keyframes revela-selo { from { opacity: 0; scale: 0.6; rotate: -30deg; } }
+
+/* ==========================================================================
+   11. CTA Final  (dentro de .fim, que também vai envolver o rodapé)
+   ========================================================================== */
+.fim {
+  --faq-resto: 249px; /* o fundo azul-claro da FAQ continua por trás do topo do card */
+  background:
+    url("assets/onda-cta.svg") 50% var(--faq-resto) / 3355.5px 45px no-repeat,
+    linear-gradient(#f0f4f9, #f0f4f9) 0 0 / 100% var(--faq-resto) no-repeat,
+    url("data:image/svg+xml;utf8,<svg viewBox='0 0 1920 563' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect width='100%' height='100%' fill='url(%23g)'/><defs><radialGradient id='g' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-70.25 52.154 -119.31 -85.028 1662.5 41.461)'><stop stop-color='rgba(246,242,236,0.5)'/><stop offset='1' stop-color='rgba(246,242,236,0.92549)'/></radialGradient></defs></svg>") 0 var(--faq-resto) / 100% calc(100% - var(--faq-resto)) no-repeat,
+    var(--branco);
+}
+
+.cta-card {
+  display: flex;
+  gap: 1px;
+  overflow: hidden;
+  border-radius: 32px;
+  background: #0a3970;
+}
+.cta-card__texto {
+  flex: 0 1 696px;
+  min-width: 0;
+  padding: 80px;
+}
+.cta-card .eyebrow { color: #8fd3ee; }
+.cta-card .titulo-secao { margin-top: 28px; color: var(--branco); }
+.cta-card .titulo-secao em { font-size: 45px; line-height: 1.5; color: #8fd3ee; }
+.cta-card .texto-secao { margin-top: 36px; color: rgba(255, 255, 255, 0.8); }
+.cta-card .btn-cta { margin-top: 36px; }
+.cta-card__foto {
+  position: relative;
+  flex: 1 1 583px;
+  min-width: 300px;
+  overflow: hidden;
+  border-radius: 32px;
+}
+.cta-card__foto img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 1023px) {
+  .fim {
+    /* mobile: sem onda; o bege começa na metade do card (453px abaixo do topo) */
+    background:
+      url("data:image/svg+xml;utf8,<svg viewBox='0 0 420 1107' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect width='100%' height='100%' fill='url(%23g)'/><defs><radialGradient id='g' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-15.367 102.55 -26.099 -167.19 363.67 81.523)'><stop stop-color='rgba(246,242,236,0.5)'/><stop offset='1' stop-color='rgba(246,242,236,0.92549)'/></radialGradient></defs></svg>") 0 453px / 100% calc(100% - 453px) no-repeat,
+      var(--branco);
+  }
+  .cta-card { flex-direction: column; }
+  /* proporção do Figma mobile (380×176): 176px no celular, cresce no tablet */
+  .cta-card__foto { order: -1; flex: none; min-width: 0; aspect-ratio: 380 / 176; }
+  .cta-card__foto img { object-position: 50% 0; }
+  .cta-card__texto {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 54px 20px;
+    text-align: center;
+  }
+  /* linhas na altura do itálico de 34px, que quebra entre a 2ª e a 3ª linha (102px no Figma) */
+  .cta-card .titulo-secao { line-height: 40.8px; }
+  .cta-card .titulo-secao em { font-size: 34px; line-height: 1; white-space: normal; }
+  .cta-card .btn-cta { padding-bottom: 6px; }
+}
+
+/* ==========================================================================
+   12. Rodapé
+   ========================================================================== */
+.rodape { padding: 78px 0 82px; }
+.rodape .container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.rodape-marca { flex: 0 1 305px; min-width: 0; }
+.rodape-coluna--profissional { flex: 0 1 241px; min-width: 0; }
+.rodape-coluna--atendimento { flex: 0 1 233px; min-width: 0; }
+
+/* logotipo: recorte do Figma (moldura 220×124, imagem 300×150 deslocada) */
+.rodape-logo { position: relative; width: 220px; height: 124px; overflow: hidden; }
+.rodape-logo img { position: absolute; left: -40px; top: -18px; width: 300px; height: 150px; max-width: none; }
+.rodape-marca p {
+  margin-top: 24px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--cinza);
+  text-box: trim-both cap alphabetic;
+}
+
+.rodape-titulo {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 11.5px;
+  letter-spacing: 1.38px;
+  text-transform: uppercase;
+  color: var(--azul);
+  text-box: trim-both cap alphabetic;
+}
+.rodape-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 32px;
+  list-style: none;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--cinza);
+}
+.rodape-lista li { text-box: trim-both cap alphabetic; }
+.rodape-lista strong { font-weight: 700; }
+.rodape-contatos li { text-box: none; }
+.rodape-contatos a,
+.rodape-contato {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 34px;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.rodape-contatos a:hover { color: var(--azul); }
+.rodape-contatos a > span:last-child,
+.rodape-contato > span:last-child { text-box: trim-both cap alphabetic; }
+.rodape-icone {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--gelo);
+}
+.rodape-icone img { width: 19px; height: 19px; }
+
+@media (max-width: 1023px) {
+  .rodape { padding: 120px 0 60px; }
+  .rodape .container { flex-direction: column; gap: 60px; }
+  .rodape-marca { flex: none; width: min(305px, 100%); }
+  .rodape-coluna--profissional { flex: none; width: 241px; }
+  .rodape-coluna--atendimento { flex: none; width: 233px; }
+  .rodape-logo { width: 143px; height: 80.6px; }
+  .rodape-logo img { left: -26px; top: -11.7px; width: 195px; height: 97.5px; }
+  .rodape-marca p { margin-top: 20px; }
+  .rodape-lista { gap: 20px; }
+}
+
+@media (max-width: 360px) {
+  .depo-selo { gap: 8px; }
+}
+
+/* ==========================================================================
+   Versão escura (index-dark.html, <html class="escuro">): só o hero muda
+   ========================================================================== */
+.hero-recorte--escuro { display: none; }
+
+.escuro .topo { background: #032145; }
+.escuro .logo-nome { color: var(--branco); }
+.escuro .logo-sub { color: rgba(255, 255, 255, 0.8); }
+
+.escuro .hero-eyebrow,
+.escuro .hero-titulo { color: var(--branco); }
+.escuro .hero-eyebrow__sep { background: #8fd3ee; }
+.escuro .hero-titulo em { color: #8fd3ee; }
+.escuro .hero-sub { color: rgba(255, 255, 255, 0.8); }
+.escuro .hero .btn-cta { box-shadow: 0 0 0 6px rgba(223, 226, 230, 0.1); }
+.escuro .hero-anel { border: calc(2.088 * var(--u)) dashed #8fd3ee; }
+
+/* faixa escura esfumada que apaga a base da foto (por cima da foto, abaixo da onda e dos selos) */
+.escuro .hero::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4.2px;
+  z-index: 2;
+  width: 100vw;
+  height: 137.78px;
+  translate: -50% 0;
+  background: url("assets/hero-sombra-escuro.png") 0 0 / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  /* menu em "vidro" escuro, cantos de 10px */
+  .escuro .menu {
+    padding: 12px 20px; /* + 1px de borda = 13px/21px do Figma */
+    border-radius: 10px;
+    background: rgba(237, 242, 247, 0.19);
+    color: rgba(255, 255, 255, 0.81);
+  }
+  .escuro .menu a:hover { color: var(--branco); }
+
+  /* no desktop o escuro usa outro recorte, esticado na moldura como no Figma */
+  .escuro .hero-recorte { display: none; }
+  .escuro .hero-recorte--escuro {
+    display: block;
+    left: calc(89.77 * var(--u));
+    top: calc(-34.45 * var(--u));
+    width: calc(488.475 * var(--u));
+    height: calc(746.281 * var(--u));
+  }
+  .escuro .hero-badge--cerebro  { left: calc(30.27 * var(--u));  top: calc(98.11 * var(--u)); }
+  .escuro .hero-badge--conversa { left: calc(610.6 * var(--u));  top: calc(197.27 * var(--u)); }
+  .escuro .hero-badge--quebra   { left: calc(-1.04 * var(--u));  top: calc(454.03 * var(--u)); }
+}
+@media (max-width: 1023px) {
+  .escuro .hero::after {
+    bottom: 0;
+    height: 65px;
+    background-image: url("assets/hero-sombra-escuro-mobile.png");
+  }
+  .escuro .hero-badge--cerebro  { left: calc(28.13 * var(--u));  top: calc(101.33 * var(--u)); }
+  .escuro .hero-badge--conversa { left: calc(601.2 * var(--u));  top: calc(197.27 * var(--u)); }
+  .escuro .hero-badge--quebra   { left: calc(3.12 * var(--u));   top: calc(457.16 * var(--u)); }
+}

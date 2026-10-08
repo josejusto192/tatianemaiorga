@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tatiane Maiorga — Psicologia Infantil e Neuropsicologia</title>
+  <meta name="description" content="Psicoterapia e avaliação neuropsicológica para crianças e adolescentes, com a família orientada em cada etapa. Presencial em São Paulo/SP e online.">
+  <link rel="preload" href="assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/newsreader-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <!-- liga as entradas ao rolar já no carregamento (evita o conteúdo aparecer e sumir) -->
+  <script>if (matchMedia('(prefers-reduced-motion: no-preference)').matches) document.documentElement.classList.add('revela');</script>
+</head>
+<body>
+
+  <!-- Header + Hero -->
+  <div class="topo">
+    <header class="cabecalho container">
+      <a class="logo" href="#" aria-label="Tatiane Maiorga — início">
+        <img class="logo-simbolo" src="assets/logo-simbolo.png" alt="" width="58" height="45">
+        <span class="logo-texto">
+          <span class="logo-nome">Tatiane Maiorga</span>
+          <span class="logo-sub">Psicologia &amp; Neuropsicologia</span>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav" id="nav" aria-label="Principal">
+        <ul class="menu">
+          <li><a href="#como-funciona">Como funciona</a></li>
+          <li><a href="#sobre-mim">Sobre mim</a></li>
+          <li><a href="#como-posso-ajudar">Como posso ajudar</a></li>
+          <li><a href="#duvidas">Dúvidas</a></li>
+        </ul>
+        <a class="btn-agendar" data-tm-shine style="--tm-atraso: 1s" href="https://wa.me/5511968445868" target="_blank" rel="noopener">
+          <span>Quero agendar</span>
+          <span class="btn-agendar__icone"><img src="assets/whatsapp.svg" alt=""></span>
+        </a>
+      </nav>
+    </header>
+
+    <section class="hero container">
+      <div class="hero-conteudo">
+        <p class="hero-eyebrow">
+          <span>Tatiane André Maiorga</span>
+          <span class="hero-eyebrow__sep" aria-hidden="true"></span>
+          <span>Psicóloga infantil e para adolescentes</span>
+        </p>
+        <h1 class="hero-titulo">Entenda o que seu filho está vivendo. <em>Encontre caminhos</em> para ajudá-lo.</h1>
+        <p class="hero-sub">Para pais de crianças e adolescentes com dificuldades emocionais, de comportamento ou na escola. Psicoterapia e avaliação neuropsicológica, com a família orientada em cada etapa.</p>
+        <a class="btn-cta" data-tm-shine style="--tm-atraso: 1.6s" href="https://wa.me/5511968445868" target="_blank" rel="noopener">
+          <span class="btn-cta__icone"><img src="assets/whatsapp.svg" alt=""></span>
+          <span class="btn-cta__texto">Quero conversar sobre meu filho</span>
+        </a>
+      </div>
+
+      <div class="hero-visual">
+        <span class="hero-anel" aria-hidden="true"></span>
+        <img class="hero-foto" src="assets/hero-foto.webp" alt="Tatiane Maiorga em seu consultório" width="1040" height="1300">
+        <img class="hero-recorte" src="assets/hero-recorte.webp" alt="" width="1040" height="1300">
+        <!-- recorte da versão escura (desktop); oculto na clara, então não chega a carregar -->
+        <img class="hero-recorte hero-recorte--escuro" src="assets/hero-recorte-escuro.webp" alt="" width="820" height="1024" loading="lazy">
+        <span class="hero-badge hero-badge--cerebro"><img src="assets/icone-cerebro.svg" alt=""></span>
+        <span class="hero-badge hero-badge--conversa"><img src="assets/icone-conversa.svg" alt=""></span>
+        <span class="hero-badge hero-badge--quebra"><img src="assets/icone-quebra-cabeca.svg" alt=""></span>
+      </div>
+
+      <ul class="hero-selos">
+        <li class="selo">
+          <span class="selo__icone"><img src="assets/icone-selo.svg" alt=""></span>
+          <span class="selo__texto"><strong>CRP 06/141102</strong> Especialista em Neuropsicologia</span>
+        </li>
+        <li class="selo">
+          <span class="selo__icone"><img src="assets/icone-local.svg" alt=""></span>
+          <span class="selo__texto"><strong>Presencial em São Paulo/SP</strong> e atendimento online</span>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <main>
+    <!-- 2. Dores -->
+    <section class="dores">
+      <div class="container">
+        <div class="cabecalho-duplo">
+          <div>
+            <p class="eyebrow">Talvez você esteja vivendo isso</p>
+            <h2 class="titulo-secao">Você percebe que algo está difícil, mas ainda não sabe <em>por onde começar?</em></h2>
+          </div>
+          <p class="texto-secao">É comum ter dúvida sobre o que é uma fase e o que pede acompanhamento. Veja se alguma destas situações parece com o que acontece na sua casa.</p>
+        </div>
+
+        <div class="dores-cards">
+          <div class="dores-linha">
+            <article class="card-dor">
+              <img class="card-dor__icone" src="assets/icone-emocoes.svg" alt="">
+              <h3>Emoções e comportamento</h3>
+              <p>Birras intensas, choro frequente e dificuldade com regras e rotinas da casa.</p>
+              <div class="card-dor__rodape">
+                <button type="button" aria-describedby="dica-emocoes"><img src="assets/icone-aspas.svg" alt=""><span>O que os pais dizem</span></button>
+                <span class="dica" id="dica-emocoes" role="tooltip">“Qualquer frustração vira uma crise.”</span>
+              </div>
+            </article>
+            <article class="card-dor">
+              <img class="card-dor__icone" src="assets/icone-ansiedade.svg" alt="">
+              <h3>Ansiedade e medos</h3>
+              <p>Medo de ficar longe dos pais, pesadelos e ansiedade antes de provas.</p>
+              <div class="card-dor__rodape">
+                <button type="button" aria-describedby="dica-ansiedade"><img src="assets/icone-aspas.svg" alt=""><span>O que os pais dizem</span></button>
+                <span class="dica" id="dica-ansiedade" role="tooltip">“Ele chora na porta da escola e não me deixa ir embora.”</span>
+              </div>
+            </article>
+          </div>
+          <div class="dores-linha dores-linha--3">
+            <article class="card-dor">
+              <img class="card-dor__icone" src="assets/icone-atencao.svg" alt="">
+              <h3>Atenção e aprendizagem</h3>
+              <p>Falta de concentração, queda nas notas ou um pedido da escola para investigar.</p>
+              <div class="card-dor__rodape">
+                <button type="button" aria-describedby="dica-atencao"><img src="assets/icone-aspas.svg" alt=""><span>O que os pais dizem</span></button>
+                <span class="dica" id="dica-atencao" role="tooltip">“A escola me chamou de novo para falar das notas.”</span>
+              </div>
+            </article>
+            <article class="card-dor">
+              <img class="card-dor__icone" src="assets/icone-adolescencia.svg" alt="">
+              <h3>Adolescência</h3>
+              <p>Afastamento da família, tristeza, insegurança com a imagem ou bullying.</p>
+              <div class="card-dor__rodape">
+                <button type="button" aria-describedby="dica-adolescencia"><img src="assets/icone-aspas.svg" alt=""><span>O que os pais dizem</span></button>
+                <span class="dica" id="dica-adolescencia" role="tooltip">“Ela se fechou no quarto e no celular.”</span>
+              </div>
+            </article>
+            <article class="card-dor">
+              <img class="card-dor__icone" src="assets/icone-mudancas.svg" alt="">
+              <h3>Mudanças na família</h3>
+              <p>Separação, luto, mudança de casa ou de escola e a chegada de um irmão.</p>
+              <div class="card-dor__rodape">
+                <button type="button" aria-describedby="dica-mudancas"><img src="assets/icone-aspas.svg" alt=""><span>O que os pais dizem</span></button>
+                <span class="dica" id="dica-mudancas" role="tooltip">“Depois da separação, ele não é mais o mesmo.”</span>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="dores-faixa">
+          <p><em>Você não precisa chegar com um diagnóstico</em>. Entender o que seu filho precisa é justamente o começo do trabalho.</p>
+          <a class="btn-cta btn-cta--claro" data-tm-shine style="--tm-atraso: 2.2s" href="https://wa.me/5511968445868" target="_blank" rel="noopener">
+            <span class="btn-cta__icone"><img src="assets/whatsapp-branco.svg" alt=""></span>
+            <span class="btn-cta__texto">Quero tirar minhas dúvidas</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Como Funciona -->
+    <section class="como-funciona" id="como-funciona">
+      <div class="container">
+        <div class="cf-foto">
+          <img src="assets/como-funciona-foto.webp" alt="Tatiane Maiorga fazendo anotações no consultório" width="1536" height="1024" loading="lazy">
+        </div>
+
+        <div class="cf-conteudo">
+          <p class="eyebrow">Como funciona</p>
+          <h2 class="titulo-secao">O primeiro passo pode ser <em>uma mensagem</em></h2>
+          <p class="texto-secao">É comum ter dúvida sobre o que é uma fase e o que pede acompanhamento. Veja se alguma destas situações parece com o que acontece na sua casa.</p>
+
+          <ol class="etapas">
+            <li class="etapa">
+              <span class="etapa__numero">1</span>
+              <div class="etapa__conteudo">
+                <p class="etapa__rotulo">Etapa 01</p>
+                <h3>Você me manda uma mensagem</h3>
+                <p class="etapa__texto">Pelo WhatsApp, quando puder. Basta dizer a idade do seu filho. Não é preciso contar o caso por mensagem.</p>
+              </div>
+            </li>
+            <li class="etapa etapa--2">
+              <span class="etapa__numero">2</span>
+              <div class="etapa__conteudo">
+                <p class="etapa__rotulo">Etapa 02</p>
+                <h3>Você tira suas dúvidas e escolhe o horário</h3>
+                <p class="etapa__texto">Eu explico valores, modalidade (presencial ou online) e os horários disponíveis. Você decide com calma.</p>
+              </div>
+            </li>
+            <li class="etapa">
+              <span class="etapa__numero">3</span>
+              <div class="etapa__conteudo">
+                <p class="etapa__rotulo">Etapa 03</p>
+                <h3>Começamos pelo acolhimento</h3>
+                <p class="etapa__texto">No primeiro atendimento, escuto você e começo a conhecer seu filho. A partir daí, definimos juntos os próximos passos e como a família participa.</p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="cf-rodape">
+            <a class="btn-cta" data-tm-shine style="--tm-atraso: 1s" href="https://wa.me/5511968445868" target="_blank" rel="noopener">
+              <span class="btn-cta__icone"><img src="assets/whatsapp.svg" alt=""></span>
+              <span class="btn-cta__texto">Quero consultar os horários</span>
+            </a>
+            <p class="cf-apoio"><span>Atendimento particular</span> <span>Presencial em SP e online</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Para Cada Fase -->
+    <section class="fases">
+      <div class="container">
+        <div class="fases-cabecalho">
+          <p class="eyebrow">Para cada fase</p>
+          <h2 class="titulo-secao">Um cuidado pensado para <em>a fase do seu filho.</em></h2>
+          <p class="texto-secao">Cada idade traz desafios diferentes. O jeito de conduzir o atendimento muda junto com seu filho.</p>
+        </div>
+
+        <div class="fases-cards" role="region" aria-label="Fases do atendimento" tabindex="0">
+          <article class="card-fase">
+            <div class="card-fase__foto">
+              <img src="assets/fase-pre-escolares.webp" alt="Criança brincando com blocos de madeira" width="786" height="590" loading="lazy">
+              <div class="card-fase__selos">
+                <span class="card-fase__icone"><img src="assets/icone-fase.svg" alt=""></span>
+                <span class="card-fase__etiqueta">Educação infantil</span>
+              </div>
+            </div>
+            <div class="card-fase__conteudo">
+              <h3>Pré-escolares</h3>
+              <p class="card-fase__sub">Brincar é a forma de se expressar.</p>
+              <ul class="card-fase__tags">
+                <li>Birras intensas</li>
+                <li>Medo de separação</li>
+                <li>Sono</li>
+                <li>Desfralde</li>
+              </ul>
+              <div class="card-fase__mais">
+                <button class="card-fase__toggle" type="button" aria-expanded="false" aria-controls="fase-pre">
+                  <span>Como o atendimento acontece</span>
+                  <span class="card-fase__sinal" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M7.43242 11.8244V4.17561H8.56758V11.8244H7.43242ZM4.08561 8.53698V7.47082H11.9144V8.53698H4.08561Z"/></svg></span>
+                </button>
+                <div class="card-fase__painel" id="fase-pre">
+                  <div><p>O processo é lúdico: brincadeiras e jogos ajudam a criança a mostrar o que sente. Os pais são orientados de perto para lidar com a rotina em casa.</p></div>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card-fase">
+            <div class="card-fase__foto">
+              <img src="assets/fase-escolares.webp" alt="Menino desenhando em uma mesa" width="786" height="590" loading="lazy">
+              <div class="card-fase__selos">
+                <span class="card-fase__icone"><img src="assets/icone-fase.svg" alt=""></span>
+                <span class="card-fase__etiqueta">Ensino fundamental</span>
+              </div>
+            </div>
+            <div class="card-fase__conteudo">
+              <h3>Escolares</h3>
+              <p class="card-fase__sub">A escola começa a pedir mais.</p>
+              <ul class="card-fase__tags">
+                <li>Atenção</li>
+                <li>Aprendizagem</li>
+                <li>Ansiedade em provas</li>
+                <li>Amizades</li>
+              </ul>
+              <div class="card-fase__mais">
+                <button class="card-fase__toggle" type="button" aria-expanded="false" aria-controls="fase-escolares">
+                  <span>Como o atendimento acontece</span>
+                  <span class="card-fase__sinal" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M7.43242 11.8244V4.17561H8.56758V11.8244H7.43242ZM4.08561 8.53698V7.47082H11.9144V8.53698H4.08561Z"/></svg></span>
+                </button>
+                <div class="card-fase__painel" id="fase-escolares">
+                  <div><p>Recursos da TCC adaptados à idade e, quando indicada, avaliação neuropsicológica. A família participa e recebe orientação para apoiar em casa e na escola.</p></div>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card-fase">
+            <div class="card-fase__foto">
+              <img src="assets/fase-adolescentes.webp" alt="Adolescente sentada em uma poltrona" width="786" height="590" loading="lazy">
+              <div class="card-fase__selos">
+                <span class="card-fase__icone"><img src="assets/icone-fase.svg" alt=""></span>
+                <span class="card-fase__etiqueta">Adolescência</span>
+              </div>
+            </div>
+            <div class="card-fase__conteudo">
+              <h3>Adolescentes</h3>
+              <p class="card-fase__sub">Um espaço próprio, com privacidade.</p>
+              <ul class="card-fase__tags">
+                <li>Afastamento</li>
+                <li>Tristeza</li>
+                <li>Imagem corporal</li>
+                <li>Telas</li>
+                <li>Bullying</li>
+              </ul>
+              <div class="card-fase__mais">
+                <button class="card-fase__toggle" type="button" aria-expanded="false" aria-controls="fase-adolescentes">
+                  <span>Como o atendimento acontece</span>
+                  <span class="card-fase__sinal" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M7.43242 11.8244V4.17561H8.56758V11.8244H7.43242ZM4.08561 8.53698V7.47082H11.9144V8.53698H4.08561Z"/></svg></span>
+                </button>
+                <div class="card-fase__painel" id="fase-adolescentes">
+                  <div><p>Conversas e estratégias para lidar com o que está difícil. A família participa de forma combinada, respeitando a privacidade do adolescente.</p></div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <a class="btn-cta" data-tm-shine style="--tm-atraso: 1.6s" href="https://wa.me/5511968445868" target="_blank" rel="noopener">
+          <span class="btn-cta__icone"><img src="assets/whatsapp.svg" alt=""></span>
+          <span class="btn-cta__texto">Quero conversar sobre<span class="so-desktop"> a fase do</span> meu filho</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 5. Família no Processo -->
+    <section class="familia">
+      <div class="container">
+        <div class="familia-conteudo">
+          <p class="eyebrow">A família no processo</p>
+          <h2 class="titulo-secao">Seu filho é acolhido. <em>Você também.</em></h2>
+          <p class="texto-secao">Cuidar de uma criança ou adolescente traz situações para as quais nem sempre há respostas prontas. No meu trabalho, pais e responsáveis fazem parte do processo: suas observações ajudam a entender o que acontece no dia a dia.</p>
+
+          <ul class="familia-lista">
+            <li class="familia-item">
+              <span class="familia-item__icone"><img src="assets/icone-escuta.svg" alt=""></span>
+              <div>
+                <h3>Escuta para a família</h3>
+                <p>Um espaço para falar das dificuldades e entender as necessidades do seu filho.</p>
+              </div>
+            </li>
+            <li class="familia-item">
+              <span class="familia-item__icone"><img src="assets/icone-orientacao.svg" alt=""></span>
+              <div>
+                <h3>Orientação clara</h3>
+                <p>Caminhos para lidar com os desafios da rotina, considerando a realidade da sua casa.</p>
+              </div>
+            </li>
+            <li class="familia-item">
+              <span class="familia-item__icone"><img src="assets/icone-casa.svg" alt=""></span>
+              <div>
+                <h3>Continuidade em casa</h3>
+                <p>Você leva o suporte para os momentos que acontecem fora das sessões.</p>
+              </div>
+            </li>
+            <li class="familia-item familia-item--nota">
+              <span class="familia-item__icone"><img src="assets/icone-cadeado.svg" alt=""></span>
+              <p>A participação da família respeita a idade, as necessidades e a privacidade de quem está em atendimento.</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="familia-foto">
+          <div class="familia-foto__quadro">
+            <img src="assets/familia-foto.webp" alt="Mãe acompanhando o filho durante uma brincadeira no consultório" width="979" height="1224" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Faixa de Credenciais (letreiro em loop: a 2ª lista é cópia para emendar) -->
+    <section class="faixa" aria-label="Credenciais">
+      <div class="faixa__trilho">
+        <ul class="faixa__lista">
+          <li><span>CRP 06/141102</span></li>
+          <li><span>Especialista em Neuropsicologia</span></li>
+          <li><span>Terapia Cognitivo-Comportamental</span></li>
+          <li><span>Psicoterapia</span></li>
+          <li><span>Avaliação neuropsicológica</span></li>
+          <li><span>Reabilitação neuropsicológica</span></li>
+        </ul>
+        <ul class="faixa__lista" aria-hidden="true">
+          <li><span>CRP 06/141102</span></li>
+          <li><span>Especialista em Neuropsicologia</span></li>
+          <li><span>Terapia Cognitivo-Comportamental</span></li>
+          <li><span>Psicoterapia</span></li>
+          <li><span>Avaliação neuropsicológica</span></li>
+          <li><span>Reabilitação neuropsicológica</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 7. Sobre Mim -->
+    <section class="sobre" id="sobre-mim">
+      <span class="sobre-marca" aria-hidden="true">Tatiane</span>
+      <div class="container">
+        <div class="sobre-galeria">
+          <div class="sobre-foto sobre-foto--1">
+            <img src="assets/sobre-foto-1.webp" alt="Tatiane Maiorga sorrindo em seu consultório" width="640" height="641" loading="lazy">
+          </div>
+          <div class="sobre-foto sobre-foto--2">
+            <img src="assets/sobre-foto-2.webp" alt="Tatiane Maiorga sentada no consultório, ao lado de uma estante de livros" width="1536" height="1024" loading="lazy">
+          </div>
+          <div class="sobre-selo" aria-hidden="true">
+            <img src="assets/selo-simbolo.svg" alt="">
+            <svg viewBox="0 0 143.4 143.4">
+              <path id="selo-circulo" d="M71.7 5.5a66.2 66.2 0 1 1 0 132.4a66.2 66.2 0 1 1 0-132.4" fill="none"/>
+              <text transform="rotate(-3 71.7 71.7)"><textPath href="#selo-circulo" textLength="410" lengthAdjust="spacing">TATIANE MAIORGA  |  PSICOLOGIA &amp; NEUROPSICOLOGIA  |  TATIANE MAIORGA  |  PSICOLOGIA &amp; NEUROPSICOLOGIA</textPath></text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="sobre-conteudo">
+          <p class="eyebrow">Quem vai cuidar do seu filho</p>
+          <h2 class="titulo-secao">Sou Tatiane Maiorga. Escolhi a Psicologia <em>pelo cuidado.</em></h2>
+          <ul class="sobre-credenciais">
+            <li><img src="assets/icone-crp.svg" alt=""><span>CRP 06/141102</span></li>
+            <li><img src="assets/icone-neuro.svg" alt=""><span>Especialista em Neuropsicologia</span></li>
+            <li><img src="assets/icone-lampada.svg" alt=""><span>Terapia Cognitivo-Comportamental</span></li>
+          </ul>
+          <p class="texto-secao sobre-bio">A Psicologia é minha segunda graduação. Cheguei a ela por uma transição de carreira, movida pelo desejo de cuidar. Hoje atendo crianças e adolescentes com a Terapia Cognitivo-Comportamental. Com os pequenos, brincadeiras e jogos fazem parte do processo, e os pais participam com escuta e orientação para o dia a dia.</p>
+          <figure class="sobre-citacao">
+            <blockquote>“Eu trato cada criança ou adolescente como eu queria que o meu filho fosse tratado por uma psicóloga.”</blockquote>
+            <figcaption>Tatiane Maiorga</figcaption>
+          </figure>
+          <a class="btn-cta" data-tm-shine style="--tm-atraso: 2.2s" href="https://wa.me/5511968445868" target="_blank" rel="noopener">
+            <span class="btn-cta__icone"><img src="assets/whatsapp.svg" alt=""></span>
+            <span class="btn-cta__texto">Quero falar com a Tatiane</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Depoimentos (carrossel contínuo: o script.js clona a lista) -->
+    <section class="depoimentos" aria-label="Depoimentos">
+      <div class="container depo-cabecalho">
+        <p class="depo-selo">
+          <img src="assets/icone-google.svg" alt="" width="20" height="20">
+          <strong>5,0</strong>
+          <img src="assets/estrelas.svg" alt="5 de 5 estrelas" width="69" height="11">
+          <span>Avaliações no Google</span>
+        </p>
+        <h2 class="titulo-secao">Quem já passou por aqui <em>conta como foi.</em></h2>
+      </div>
+
+      <div class="depo-carrossel">
+        <div class="depo-trilho">
+          <ul class="depo-lista">
+            <li class="depo-card">
+              <div class="depo-card__topo">
+                <img src="assets/google-estrelas.svg" alt="Avaliação 5 estrelas no Google" width="99" height="20">
+                <span>há 2 meses</span>
+              </div>
+              <p class="depo-card__texto">Eu tinha receio de que meu filho não quisesse voltar. Ele saiu da primeira sessão contando das brincadeiras e perguntando quando seria a próxima.</p>
+              <div class="depo-card__autor">
+                <span class="depo-card__avatar" aria-hidden="true">R</span>
+                <div>
+                  <p class="depo-card__nome">Renata P.</p>
+                  <p class="depo-card__origem">Avaliação no Google</p>
+                </div>
+              </div>
+            </li>
+            <li class="depo-card">
+              <div class="depo-card__topo">
+                <img src="assets/google-estrelas.svg" alt="Avaliação 5 estrelas no Google" width="99" height="20">
+                <span>há 2 meses</span>
+              </div>
+              <p class="depo-card__texto">Eu tinha receio de que meu filho não quisesse voltar. Ele saiu da primeira sessão contando das brincadeiras e perguntando quando seria a próxima.</p>
+              <div class="depo-card__autor">
+                <span class="depo-card__avatar" aria-hidden="true">R</span>
+                <div>
+                  <p class="depo-card__nome">Renata P.</p>
+                  <p class="depo-card__origem">Avaliação no Google</p>
+                </div>
+              </div>
+            </li>
+            <li class="depo-card">
+              <div class="depo-card__topo">
+                <img src="assets/google-estrelas.svg" alt="Avaliação 5 estrelas no Google" width="99" height="20">
+                <span>há 2 meses</span>
+              </div>
+              <p class="depo-card__texto">Eu tinha receio de que meu filho não quisesse voltar. Ele saiu da primeira sessão contando das brincadeiras e perguntando quando seria a próxima.</p>
+              <div class="depo-card__autor">
+                <span class="depo-card__avatar" aria-hidden="true">R</span>
+                <div>
+                  <p class="depo-card__nome">Renata P.</p>
+                  <p class="depo-card__origem">Avaliação no Google</p>
+                </div>
+              </div>
+            </li>
+            <li class="depo-card">
+              <div class="depo-card__topo">
+                <img src="assets/google-estrelas.svg" alt="Avaliação 5 estrelas no Google" width="99" height="20">
+                <span>há 2 meses</span>
+              </div>
+              <p class="depo-card__texto">Eu tinha receio de que meu filho não quisesse voltar. Ele saiu da primeira sessão contando das brincadeiras e perguntando quando seria a próxima.</p>
+              <div class="depo-card__autor">
+                <span class="depo-card__avatar" aria-hidden="true">R</span>
+                <div>
+                  <p class="depo-card__nome">Renata P.</p>
+                  <p class="depo-card__origem">Avaliação no Google</p>
+                </div>
+              </div>
+            </li>
+            <li class="depo-card">
+              <div class="depo-card__topo">
+                <img src="assets/google-estrelas.svg" alt="Avaliação 5 estrelas no Google" width="99" height="20">
+                <span>há 2 meses</span>
+              </div>
+              <p class="depo-card__texto">Eu tinha receio de que meu filho não quisesse voltar. Ele saiu da primeira sessão contando das brincadeiras e perguntando quando seria a próxima.</p>
+              <div class="depo-card__autor">
+                <span class="depo-card__avatar" aria-hidden="true">R</span>
+                <div>
+                  <p class="depo-card__nome">Renata P.</p>
+                  <p class="depo-card__origem">Avaliação no Google</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container depo-rodape">
+        <a class="btn-cta btn-cta--claro" data-tm-shine style="--tm-atraso: 1s" href="https://wa.me/5511968445868" target="_blank" rel="noopener">
+          <span class="btn-cta__icone"><img src="assets/whatsapp-branco.svg" alt=""></span>
+          <span class="btn-cta__texto">Quero tirar minhas dúvidas</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 9. Serviços -->
+    <section class="servicos" id="como-posso-ajudar">
+      <div class="container">
+        <div class="cabecalho-duplo">
+          <div>
+            <p class="eyebrow">Como posso ajudar</p>
+            <h2 class="titulo-secao">Um cuidado que começa por <em>entender seu filho.</em></h2>
+          </div>
+          <p class="texto-secao">O serviço indicado depende da necessidade de cada criança ou adolescente. Você pode entrar em contato mesmo sem saber qual procurar.</p>
+        </div>
+
+        <div class="servicos-cards">
+          <article class="card-servico">
+            <span class="card-servico__icone"><img src="assets/icone-servico-psicoterapia.svg" alt=""></span>
+            <h3>Psicoterapia</h3>
+            <p class="card-servico__sub">Para lidar com emoções e comportamento.</p>
+            <p class="card-servico__texto">Um espaço para acolher emoções e trabalhar as dificuldades em casa, na escola e nas relações. Uso a Terapia Cognitivo-Comportamental. Com os pequenos, brincadeiras e jogos fazem parte do processo.</p>
+            <ul class="card-servico__tags"><li>Crises e birras</li><li>Ansiedade</li><li>Adolescência</li></ul>
+          </article>
+          <article class="card-servico card-servico--destaque">
+            <span class="card-servico__icone"><img src="assets/icone-servico-avaliacao.svg" alt=""></span>
+            <h3>Avaliação neuropsicológica</h3>
+            <p class="card-servico__sub">Para entender atenção, aprendizagem e desenvolvimento.</p>
+            <p class="card-servico__texto">Busca compreender o perfil cognitivo e comportamental do seu filho. Pode fazer parte da investigação de TDAH, TEA e dificuldades de aprendizagem, conforme a indicação de cada caso.</p>
+            <ul class="card-servico__tags"><li>Pedido da escola</li><li>TDAH</li><li>TEA</li></ul>
+          </article>
+          <article class="card-servico">
+            <span class="card-servico__icone"><img src="assets/icone-servico-reabilitacao.svg" alt=""></span>
+            <h3>Reabilitação neuropsicológica</h3>
+            <p class="card-servico__sub">Para trabalhar dificuldades no dia a dia.</p>
+            <p class="card-servico__texto">Um acompanhamento com estratégias organizadas para o perfil do seu filho e para os objetivos definidos juntos, com reflexos no cotidiano em casa e na escola.</p>
+            <ul class="card-servico__tags"><li>Atenção</li><li>Aprendizagem</li><li>Rotina</li></ul>
+          </article>
+        </div>
+
+        <div class="servicos-rodape">
+          <p>Não sabe qual serviço procurar? Me conte a idade do seu filho e o que motivou o contato.</p>
+          <a class="btn-cta" data-tm-shine style="--tm-atraso: 1.6s" href="https://wa.me/5511968445868" target="_blank" rel="noopener">
+            <span class="btn-cta__icone"><img src="assets/whatsapp.svg" alt=""></span>
+            <span class="btn-cta__texto">Quero ajuda para escolher</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Dúvidas Frequentes (acordeão nativo: <details name> abre uma por vez) -->
+    <section class="faq" id="duvidas">
+      <div class="container">
+        <div class="faq-cabecalho">
+          <p class="eyebrow">Dúvidas frequentes</p>
+          <h2 class="titulo-secao">O que os pais perguntam <em>antes de agendar.</em></h2>
+        </div>
+
+        <div class="faq-conteudo">
+          <div class="faq-lista">
+          <details class="faq-item" name="faq" open>
+            <summary>
+              <span>Quanto custa o atendimento?</span>
+              <img class="faq-item__abrir" src="assets/faq-abrir.svg" alt="">
+              <img class="faq-item__fechar" src="assets/faq-fechar.svg" alt="">
+            </summary>
+            <p>O valor depende do serviço: psicoterapia, avaliação ou reabilitação neuropsicológica. Eu informo tudo pelo WhatsApp antes de qualquer agendamento, sem compromisso.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>
+              <span>Você atende por convênio?</span>
+              <img class="faq-item__abrir" src="assets/faq-abrir.svg" alt="">
+              <img class="faq-item__fechar" src="assets/faq-fechar.svg" alt="">
+            </summary>
+            <p>Não. O atendimento é particular. Valores e formas de pagamento são informados pelo WhatsApp.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>
+              <span>Quanto tempo dura o acompanhamento?</span>
+              <img class="faq-item__abrir" src="assets/faq-abrir.svg" alt="">
+              <img class="faq-item__fechar" src="assets/faq-fechar.svg" alt="">
+            </summary>
+            <p>Depende da necessidade do seu filho e dos objetivos definidos juntos. Os próximos passos são conversados com você ao longo do processo.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>
+              <span>É melhor presencial ou online?</span>
+              <img class="faq-item__abrir" src="assets/faq-abrir.svg" alt="">
+              <img class="faq-item__fechar" src="assets/faq-fechar.svg" alt="">
+            </summary>
+            <p>Atendo presencialmente em São Paulo/SP e também online. A modalidade mais adequada depende do serviço e das necessidades do seu filho, e conversamos sobre isso antes de começar.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>
+              <span>Como é a primeira sessão se meu filho é pequeno e não sabe explicar o que sente?</span>
+              <img class="faq-item__abrir" src="assets/faq-abrir.svg" alt="">
+              <img class="faq-item__fechar" src="assets/faq-fechar.svg" alt="">
+            </summary>
+            <p>Ele não precisa explicar. Com crianças pequenas, o processo é lúdico: brincadeiras e jogos ajudam a criança a se expressar do jeito dela. Você também é ouvido, para que eu entenda o que acontece em casa e na escola.</p>
+          </details>
+          </div>
+
+          <aside class="faq-contato">
+            <div class="faq-contato__perfil">
+              <span class="faq-contato__avatar">
+                <img src="assets/faq-tatiane.webp" alt="Tatiane Maiorga" width="64" height="64" loading="lazy">
+                <span class="faq-contato__badge"><img src="assets/whatsapp-branco.svg" alt=""></span>
+              </span>
+              <div>
+                <p class="faq-contato__nome">Tatiane Maiorga</p>
+                <p class="faq-contato__status">Psicóloga · CRP 06/141102</p>
+              </div>
+            </div>
+            <h3 class="faq-contato__titulo">Ainda está com <em>dúvidas?</em></h3>
+            <p class="faq-contato__texto">Fale comigo pelo WhatsApp. Eu respondo pessoalmente sobre valores, modalidade e horários.</p>
+            <a class="btn-cta" data-tm-shine style="--tm-atraso: 2.2s" href="https://wa.me/5511968445868" target="_blank" rel="noopener">
+              <span class="btn-cta__icone"><img src="assets/whatsapp.svg" alt=""></span>
+              <span class="btn-cta__texto">Perguntar pelo WhatsApp</span>
+            </a>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 11. CTA Final + 12. Rodapé: fundo compartilhado (degradê bege contínuo) -->
+  <div class="fim">
+    <section class="cta-final" aria-label="Agende uma conversa">
+      <div class="container">
+        <div class="cta-card">
+          <div class="cta-card__texto">
+            <p class="eyebrow">O primeiro passo é uma mensagem</p>
+            <h2 class="titulo-secao">Vamos conversar sobre o atendimento <em>para seu filho?</em></h2>
+            <p class="texto-secao">Me mande uma mensagem. Eu respondo suas dúvidas e informo os horários disponíveis.</p>
+            <a class="btn-cta btn-cta--claro" data-tm-shine style="--tm-atraso: 1.6s" href="https://wa.me/5511968445868" target="_blank" rel="noopener">
+              <span class="btn-cta__icone"><img src="assets/whatsapp-branco.svg" alt=""></span>
+              <span class="btn-cta__texto">Quero tirar minhas dúvidas</span>
+            </a>
+          </div>
+          <div class="cta-card__foto">
+            <img src="assets/cta-foto.webp" alt="Tatiane Maiorga sentada em uma poltrona no consultório, sorrindo" width="1166" height="777" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. Rodapé -->
+    <footer class="rodape">
+      <div class="container">
+        <div class="rodape-marca">
+          <div class="rodape-logo"><img src="assets/logotipo.webp" alt="Tatiane Maiorga — Psicologia &amp; Neuropsicologia" width="600" height="300" loading="lazy"></div>
+          <p>Psicoterapia e avaliação neuropsicológica para crianças e adolescentes, com a família no processo.</p>
+        </div>
+        <div class="rodape-coluna rodape-coluna--profissional">
+          <h2 class="rodape-titulo">Profissional</h2>
+          <ul class="rodape-lista">
+            <li><strong>Tatiane André Maiorga</strong></li>
+            <li>Psicóloga, especialista em<br>Neuropsicologia</li>
+            <li>CRP 06/141102</li>
+          </ul>
+        </div>
+        <div class="rodape-coluna rodape-coluna--atendimento">
+          <h2 class="rodape-titulo">Atendimento</h2>
+          <ul class="rodape-lista">
+            <li>Crianças e adolescentes</li>
+            <li>Presencial em São Paulo/SP</li>
+            <li>Online</li>
+          </ul>
+        </div>
+        <div class="rodape-coluna">
+          <h2 class="rodape-titulo">Contato</h2>
+          <ul class="rodape-lista rodape-contatos">
+            <li><a href="https://wa.me/5511968445868" target="_blank" rel="noopener"><span class="rodape-icone"><img src="assets/icone-rodape-whatsapp.svg" alt=""></span><span>(11) 96844-5868</span></a></li>
+            <li><a href="https://www.instagram.com/psicologa_tatiane_maiorga/" target="_blank" rel="noopener"><span class="rodape-icone"><img src="assets/icone-rodape-instagram.svg" alt=""></span><span>@psicologa_tatiane_maiorga</span></a></li>
+            <!-- falta o link do canal: trocar o <span> por <a href="..."> quando tiver a URL -->
+            <li><span class="rodape-contato"><span class="rodape-icone"><img src="assets/icone-rodape-youtube.svg" alt=""></span><span>YouTube · Tatiane Maiorga</span></span></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
