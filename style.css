@@ -208,8 +208,10 @@ main, .fim { overflow-x: clip; }
 .topo::after {
   content: "";
   position: absolute;
+  /* -1px: avança 1px sobre a seção vizinha (mesma cor) para não sobrar uma linha fina
+     na emenda quando a borda cai no meio de um pixel (zoom do sistema, larguras quebradas) */
   left: 50%;
-  bottom: 0;
+  bottom: -1px;
   z-index: 3;
   width: 4617.72px;
   height: 79px;
@@ -554,13 +556,14 @@ main, .fim { overflow-x: clip; }
   position: relative;
   padding: 80px 0;
   background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1920 978' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect width='100%' height='100%' fill='url(%23g)'/><defs><radialGradient id='g' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-96 87.131 -171.05 -183.93 960 80.512)'><stop stop-color='%23edf2f7'/><stop offset='1' stop-color='%23e9f0f6'/></radialGradient></defs></svg>") 0 0 / 100% 100%;
+  background-color: #e9f0f6; /* cor da borda do degradê, por baixo da imagem (evita linha clara na emenda) */
 }
 /* onda de transição para "Como funciona" */
 .dores::after {
   content: "";
   position: absolute;
   left: 50%;
-  bottom: 0;
+  bottom: -1px; /* ver nota da onda do hero */
   width: 3267.5px;
   height: 45px;
   translate: -50% 0;
@@ -739,7 +742,7 @@ main, .fim { overflow-x: clip; }
   content: "";
   position: absolute;
   left: calc(50% - 1522px);
-  bottom: 0;
+  bottom: -1px; /* ver nota da onda do hero */
   width: 2426.5px;
   height: 45px;
   background: url("assets/onda-como-funciona.svg") 0 0 / 100% 100% no-repeat;
@@ -1643,7 +1646,7 @@ main, .fim { overflow-x: clip; }
   content: "";
   position: absolute;
   left: 50%;
-  top: -29px;
+  top: -28px; /* 1px dentro da seção, para não sobrar linha na emenda */
   width: 96px;
   height: 29px;
   translate: -50% 0;
@@ -1789,7 +1792,7 @@ main, .fim { overflow-x: clip; }
   content: "";
   position: absolute;
   left: calc(50% - 1254px);
-  top: 0;
+  top: -1px; /* ver nota da onda do hero */
   width: 2426.5px;
   height: 45px;
   rotate: 180deg;
@@ -2096,7 +2099,7 @@ main, .fim { overflow-x: clip; }
   --faq-resto: 249px; /* o fundo azul-claro da FAQ continua por trás do topo do card */
   background:
     url("assets/onda-cta.svg") 50% var(--faq-resto) / 3355.5px 45px no-repeat,
-    linear-gradient(#f0f4f9, #f0f4f9) 0 0 / 100% var(--faq-resto) no-repeat,
+    linear-gradient(#f0f4f9, #f0f4f9) 0 0 / 100% calc(var(--faq-resto) + 1px) no-repeat, /* +1px por baixo da onda */
     url("data:image/svg+xml;utf8,<svg viewBox='0 0 1920 563' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect width='100%' height='100%' fill='url(%23g)'/><defs><radialGradient id='g' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-70.25 52.154 -119.31 -85.028 1662.5 41.461)'><stop stop-color='rgba(246,242,236,0.5)'/><stop offset='1' stop-color='rgba(246,242,236,0.92549)'/></radialGradient></defs></svg>") 0 var(--faq-resto) / 100% calc(100% - var(--faq-resto)) no-repeat,
     var(--branco);
 }
@@ -2306,4 +2309,12 @@ main, .fim { overflow-x: clip; }
   .escuro .hero-badge--cerebro  { left: calc(28.13 * var(--u));  top: calc(101.33 * var(--u)); }
   .escuro .hero-badge--conversa { left: calc(601.2 * var(--u));  top: calc(197.27 * var(--u)); }
   .escuro .hero-badge--quebra   { left: calc(3.12 * var(--u));   top: calc(457.16 * var(--u)); }
+}
+
+/* Celulares mais estreitos que o Figma mobile (420px): o destaque em itálico pode quebrar
+   e as linhas se equilibram, para não sobrar uma palavra sozinha numa linha curta.
+   A partir de 420px as quebras seguem exatamente o Figma. */
+@media (max-width: 419px) {
+  .titulo-secao { text-wrap: balance; }
+  .titulo-secao em { white-space: normal; }
 }
