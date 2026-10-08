@@ -2316,3 +2316,40 @@ main, .fim { overflow-x: clip; }
   .titulo-secao { text-wrap: balance; }
   .titulo-secao em { white-space: normal; }
 }
+
+/* ==========================================================================
+   Botão flutuante do WhatsApp (canto inferior direito, verde oficial)
+   ========================================================================== */
+.whatsapp-flutuante {
+  position: fixed;
+  right: 24px;
+  bottom: calc(24px + env(safe-area-inset-bottom)); /* acima da barra do iPhone */
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #25d366;
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.35);
+  transition: scale 0.2s ease, box-shadow 0.2s ease;
+}
+.whatsapp-flutuante:hover {
+  scale: 1.08;
+  box-shadow: 0 14px 28px -8px rgba(0, 0, 0, 0.4);
+}
+.whatsapp-flutuante:focus-visible { outline: 3px solid #128c7e; outline-offset: 3px; }
+.whatsapp-flutuante img { width: 32px; height: 32px; }
+
+@media (max-width: 1023px) {
+  .whatsapp-flutuante {
+    right: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    width: 56px;
+    height: 56px;
+  }
+  .whatsapp-flutuante img { width: 30px; height: 30px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-flutuante { transition: none; }
+}
