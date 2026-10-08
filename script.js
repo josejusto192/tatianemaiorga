@@ -164,3 +164,20 @@ if (familia) {
   new IntersectionObserver(([e]) => familia.classList.toggle('fora', !e.isIntersecting)).observe(familia);
   mostrar(0);
 }
+
+// Rastreamento: cada clique num link do WhatsApp vira o evento "contato_whatsapp",
+// com o local do botão (data-local). O site não envia nada sozinho: só entrega o evento
+// ao gerenciador de tags instalado (Cloudflare Zaraz e/ou Google Tag Manager), que decide
+// para onde vai (GA4, Google Ads, Meta) conforme o consentimento. Sem dados pessoais
+// e sem o texto da mensagem.
+window.dataLayer = window.dataLayer || [];
+function rastrear(evento, dados) {
+  // event_id igual no navegador e no servidor evita contar a conversão duas vezes (Meta CAPI)
+  const comId = { ...dados, event_id: crypto.randomUUID?.() ?? String(Date.now()) + Math.random() };
+  window.dataLayer.push({ event: evento, ...comId });
+  window.zaraz?.track?.(evento, comId);
+}
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a[href*="wa.me/"]');
+  if (link) rastrear('contato_whatsapp', { local: link.dataset.local || 'outro' });
+});
