@@ -14,6 +14,7 @@ Para agendar: mandar uma mensagem pelo WhatsApp com a idade do filho, tirar as d
 - [Como funciona](https://tatianemaiorga.vercel.app/#como-funciona): os três passos, da primeira mensagem ao primeiro atendimento.
 - [Sobre a Tatiane](https://tatianemaiorga.vercel.app/#sobre-mim): formação, credenciais e forma de trabalho.
 - [Serviços](https://tatianemaiorga.vercel.app/#como-posso-ajudar): psicoterapia, avaliação e reabilitação neuropsicológica.
+- [Onde atendo](https://tatianemaiorga.vercel.app/#onde-atendo): consultório em Perdizes (São Paulo/SP), mapa e atendimento online.
 - [Dúvidas frequentes](https://tatianemaiorga.vercel.app/#duvidas): valores, convênio, duração, presencial ou online e primeira sessão com crianças pequenas.
 
 ## Serviços

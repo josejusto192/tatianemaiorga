@@ -56,18 +56,6 @@ document.querySelectorAll('.card-fase__toggle').forEach((botao) => {
   });
 });
 
-// Depoimentos: clona a lista para o carrossel rodar sem emendas (sem JS, fica estático)
-const trilhoDepo = document.querySelector('.depo-trilho');
-if (trilhoDepo) {
-  const lista = trilhoDepo.querySelector('.depo-lista');
-  for (let i = 0; i < 3; i++) {
-    const copia = lista.cloneNode(true);
-    copia.setAttribute('aria-hidden', 'true');
-    trilhoDepo.append(copia);
-  }
-  trilhoDepo.classList.add('rolando');
-}
-
 // Citação do "Sobre mim": separa as palavras para escurecerem uma a uma com o scroll
 const citacao = document.querySelector('.sobre-citacao blockquote');
 if (citacao) {
@@ -85,10 +73,10 @@ if (citacao) {
 // Entradas ao rolar: cada bloco aparece com um movimento suave quando entra na tela
 if (document.documentElement.classList.contains('revela')) {
   const grupos = {
-    sobe: '.cabecalho-duplo > *, .fases-cabecalho > *, .depo-cabecalho > *, .faq-cabecalho > *,' +
+    sobe: '.cabecalho-duplo > *, .fases-cabecalho > *, .local-cabecalho > *, .faq-cabecalho > *,' +
           '.cf-conteudo > :not(.etapas), .familia-conteudo > :not(.familia-lista), .sobre-conteudo > *,' +
           '.card-dor, .dores-faixa, .etapa, .card-fase, .fases .btn-cta, .familia-item,' +
-          '.depo-carrossel, .depo-rodape, .card-servico, .servicos-rodape, .faq-item, .faq-contato, .cta-card__texto > *,' +
+          '.local-card, .local-mapa, .card-servico, .servicos-rodape, .faq-item, .faq-contato, .cta-card__texto > *,' +
           '.rodape .container > *',
     esq: '.cf-foto, .sobre-foto',
     dir: '.familia-foto, .cta-card__foto',

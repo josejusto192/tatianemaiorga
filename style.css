@@ -1630,19 +1630,15 @@ main, .fim { overflow-x: clip; }
 }
 
 /* ==========================================================================
-   8. Depoimentos
+   8. Onde atendo (localização) — mesmo fundo e divisores da antiga seção de depoimentos
    ========================================================================== */
-.depoimentos {
-  --depo-card: 413px;
-  --depo-x: 1072.5px;  /* início da lista em relação ao centro da tela (como no Figma) */
-  --depo-s: 2165px;    /* largura de uma lista: 5 × (card + 20px) */
-  --depo-duracao: 50s;
+.local {
   position: relative;
   padding: 80px 0;
   background: linear-gradient(#0d3462, #0b2a4f 55%, #09223f);
 }
 /* "abinha" com seta no topo da seção */
-.depoimentos::before {
+.local::before {
   content: "";
   position: absolute;
   left: 50%;
@@ -1650,133 +1646,129 @@ main, .fim { overflow-x: clip; }
   width: 96px;
   height: 29px;
   translate: -50% 0;
-  background: url("assets/seta-depoimentos.svg") 0 0 / 100% 100% no-repeat;
+  background: url("assets/seta-secao.svg") 0 0 / 100% 100% no-repeat;
 }
 
-.depo-cabecalho {
+.local-cabecalho {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
-.depo-selo {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 5px 14px;
-  border-radius: 999px;
-  background: var(--branco);
-  font-size: 14px;
-  white-space: nowrap;
-}
-.depo-selo img:first-child { width: 20px; height: 20px; }
-.depo-selo img + strong + img { width: 69.01px; height: 10.5px; }
-.depo-selo strong { font-weight: 600; line-height: 15px; text-box: trim-both cap alphabetic; }
-.depo-selo span { font-weight: 500; line-height: 13px; color: #5e6673; text-box: trim-both cap alphabetic; }
-/* padding: o itálico de 45px é mais alto que a linha de 40px (30px no Figma em vez de 28px) */
-.depoimentos .titulo-secao { margin-top: 33px; padding-top: 2px; color: var(--branco); }
-.depoimentos .titulo-secao em { font-size: 45px; color: #5fbfe3; }
+.local .eyebrow { color: #8fd3ee; }
+/* padding: o itálico de 45px é mais alto que a linha de 40px */
+.local .titulo-secao { padding-top: 2px; color: var(--branco); }
+.local .titulo-secao em { font-size: 45px; color: #5fbfe3; }
+.local-cabecalho .texto-secao { max-width: 506px; margin-top: 36px; color: rgba(255, 255, 255, 0.8); }
 
-/* carrossel contínuo */
-.depo-carrossel {
-  margin-top: 40px;
-  overflow: hidden;
-}
-.depo-trilho {
-  display: flex;
-  width: max-content;
-  margin-left: calc(50% - var(--depo-x));
-}
-.depo-trilho.rolando {
-  margin-left: calc(50% - var(--depo-x) - var(--depo-s));
-  animation: depo-rolar var(--depo-duracao) linear infinite;
-}
-@keyframes depo-rolar {
-  to { translate: calc(var(--depo-s) * -1) 0; }
-}
-@media (hover: hover) {
-  .depo-trilho.rolando:hover { animation-play-state: paused; }
-}
-.depo-lista {
-  display: flex;
-  flex: none;
+.local-grade {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
   gap: 20px;
-  padding-right: 20px;
-  list-style: none;
+  margin-top: 40px;
 }
-.depo-card {
+.local-card {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  flex: none;
-  width: var(--depo-card);
   padding: 32px;
   border-radius: 20px;
   background: var(--branco);
-  box-shadow: 0 1px 1px rgba(30, 39, 51, 0.04);
 }
-.depo-card__topo {
+.local-lista {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 20px;
+  flex-direction: column;
+  gap: 28px;
+  list-style: none;
 }
-.depo-card__topo img { width: 99.01px; height: 20px; }
-.depo-card__topo span { font-size: 12.5px; line-height: 12.5px; color: #7a828e; }
-.depo-card__texto {
-  font-size: 16px;
-  line-height: 1.5;
-  color: #2b3440;
-  text-box: trim-both cap alphabetic;
-}
-.depo-card__autor { display: flex; align-items: center; gap: 12px; }
-.depo-card__avatar {
+.local-item { display: flex; align-items: flex-start; gap: 20px; }
+.local-item__icone {
   display: grid;
   place-items: center;
   flex: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #0b3b73;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 15px;
-  color: var(--branco);
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--gelo);
 }
-.depo-card__nome {
+.local-item__icone img { width: 24px; height: 24px; }
+.local-item__rotulo {
+  padding-top: 4px;
   font-weight: 600;
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 1.54px;
+  text-transform: uppercase;
+  color: var(--ciano);
+  text-box: trim-both cap alphabetic;
+}
+.local-item__titulo {
+  margin-top: 16px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.5;
+  text-box: trim-both cap alphabetic;
+}
+.local-item__texto {
+  margin-top: 14px;
   font-size: 14px;
-  line-height: 18.2px;
+  line-height: 1.5;
+  color: var(--texto-80);
   text-box: trim-both cap alphabetic;
 }
-.depo-card__origem {
-  margin-top: 10px;
-  font-size: 12.5px;
-  line-height: 16.25px;
-  color: #5e6673;
-  text-box: trim-both cap alphabetic;
+.local-card .btn-cta { align-self: flex-start; margin-top: auto; }
+.local-lista { margin-bottom: 40px; } /* distância mínima até o botão, que desce para a base do card */
+.local-rota {
+  align-self: flex-start;
+  margin-top: 20px;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--azul);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
+.local-rota:hover { color: var(--texto); }
 
-.depo-rodape { display: flex; justify-content: center; margin-top: 40px; }
+.local-mapa {
+  position: relative;
+  min-height: 460px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #e9eef3;
+}
+.local-mapa iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+/* selinho com o nome (acima do seletor de satélite, sem cobrir o logo e os créditos do Google) */
+.local-mapa__selo {
+  position: absolute;
+  left: 16px;
+  bottom: 64px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: calc(100% - 32px);
+  padding: 10px 14px 10px 10px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 24px -12px rgba(11, 42, 79, 0.35);
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--texto-80);
+  pointer-events: none;
+}
+.local-mapa__selo img { flex: none; width: 36px; height: 28px; }
+.local-mapa__selo strong { display: block; font-weight: 600; font-size: 14px; color: var(--texto); }
 
 @media (max-width: 1023px) {
-  .depoimentos {
-    --depo-card: 294px;
-    --depo-x: 775.5px;
-    --depo-s: 1570px;
-    --depo-duracao: 36s;
-    padding: 60px 0;
-  }
-  .depoimentos .titulo-secao { padding-top: 0; }
-  .depoimentos .titulo-secao em { font-size: calc(36em / 28); line-height: 1.5; }
-  .depo-carrossel { margin-top: 36px; }
-  .depo-card { padding: 24px 20px; }
-  .depo-rodape { margin-top: 36px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  /* sem animação: o carrossel vira uma faixa com rolagem manual */
-  .depo-carrossel { overflow-x: auto; }
-  .depo-trilho.rolando { animation: none; }
+  .local { padding: 60px 0; }
+  .local .titulo-secao { padding-top: 0; }
+  .local-grade { grid-template-columns: 1fr; margin-top: 36px; }
+  .local .titulo-secao { text-wrap: balance; } /* sem "em" sozinho numa linha */
+  .local-card { padding: 28px 20px; }
+  .local-item__titulo { font-size: 16px; text-wrap: balance; } /* padrão mobile do Figma para títulos de item */
+  /* endereço em duas linhas no celular, sem número ou CEP pulando sozinho */
+  .local-sep { display: none; }
+  .local-linha { display: block; }
+  .local-mapa { min-height: 340px; }
 }
 
 /* ==========================================================================
@@ -1787,7 +1779,7 @@ main, .fim { overflow-x: clip; }
   padding: 80px 0;
   background: var(--branco);
 }
-/* curva escura que continua o fundo dos Depoimentos (vetor do Figma girado 180°) */
+/* curva escura que continua o fundo da seção "Onde atendo" (vetor do Figma girado 180°) */
 .servicos::before {
   content: "";
   position: absolute;
@@ -2242,9 +2234,6 @@ main, .fim { overflow-x: clip; }
   .rodape-lista { gap: 20px; }
 }
 
-@media (max-width: 360px) {
-  .depo-selo { gap: 8px; }
-}
 
 /* ==========================================================================
    Versão escura (index-dark.html, <html class="escuro">): só o hero muda
