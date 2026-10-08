@@ -1743,28 +1743,6 @@ main, .fim { overflow-x: clip; }
   background: #e9eef3;
 }
 .local-mapa iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-/* selinho com o nome, abre a ficha no Google (acima do seletor de satélite, sem cobrir o logo e os créditos do Google) */
-.local-mapa__selo {
-  position: absolute;
-  left: 16px;
-  bottom: 64px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  max-width: calc(100% - 32px);
-  padding: 10px 14px 10px 10px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 10px 24px -12px rgba(11, 42, 79, 0.35);
-  font-size: 12.5px;
-  line-height: 1.4;
-  color: var(--texto-80);
-  transition: translate 0.2s ease, box-shadow 0.2s ease;
-}
-.local-mapa__selo:hover { translate: 0 -2px; box-shadow: 0 14px 28px -12px rgba(11, 42, 79, 0.45); }
-.local-mapa__selo:focus-visible { outline: 2px solid var(--azul); outline-offset: 2px; }
-.local-mapa__selo img { flex: none; width: 36px; height: 28px; }
-.local-mapa__selo strong { display: block; font-weight: 600; font-size: 14px; color: var(--texto); }
 
 @media (max-width: 1023px) {
   .local { padding: 60px 0; }
