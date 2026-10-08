@@ -262,9 +262,9 @@ main, .fim { overflow-x: clip; }
 .menu {
   display: flex;
   gap: 20px;
-  padding: 10px 20px; /* + 1px de borda = 11px/21px do Figma */
+  padding: 12px 20px; /* + 1px de borda = 13px/21px (medidas do menu da versão escura) */
   border: 1px solid rgba(10, 85, 174, 0.08);
-  border-radius: 999px;
+  border-radius: 10px;
   background: rgba(237, 242, 247, 0.85);
   backdrop-filter: blur(4px);
   font-weight: 500;
@@ -2280,8 +2280,6 @@ main, .fim { overflow-x: clip; }
 @media (min-width: 1024px) {
   /* menu em "vidro" escuro, cantos de 10px */
   .escuro .menu {
-    padding: 12px 20px; /* + 1px de borda = 13px/21px do Figma */
-    border-radius: 10px;
     background: rgba(237, 242, 247, 0.19);
     color: rgba(255, 255, 255, 0.81);
   }
