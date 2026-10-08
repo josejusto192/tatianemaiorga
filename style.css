@@ -2403,14 +2403,21 @@ main, .fim { overflow-x: clip; }
 }
 .cookies__btn:focus-visible { outline: 2px solid var(--azul); outline-offset: 2px; }
 
-/* link "Preferências de cookies" no rodapé */
-.rodape-cookies {
+/* link para a política no texto do banner */
+.cookies__texto a { color: var(--azul); text-decoration: underline; text-underline-offset: 3px; }
+
+/* links legais no rodapé: "Política de privacidade" e "Preferências de cookies" (este entra pelo script.js) */
+.rodape-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
   margin-top: 16px;
   font-size: 13px;
   color: var(--cinza);
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
+.rodape-legal a,
+.rodape-cookies { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.rodape-legal a:hover,
 .rodape-cookies:hover { color: var(--azul); }
 
 @media (max-width: 1023px) {
@@ -2425,4 +2432,57 @@ main, .fim { overflow-x: clip; }
 }
 @media (prefers-reduced-motion: reduce) {
   .cookies { animation: none; }
+}
+
+/* ==========================================================================
+   Página de Política de Privacidade (politica-de-privacidade.html)
+   ========================================================================== */
+.pagina-politica { background: var(--areia); }
+.politica-voltar { margin-left: auto; font-weight: 500; font-size: 14px; color: var(--azul); }
+.politica-voltar:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.politica { max-width: 760px; padding: 80px 0 100px; }
+.politica-data { margin-top: 20px; font-size: 14px; color: var(--cinza); }
+.politica > p,
+.politica li { font-size: 16px; line-height: 1.7; color: var(--texto-80); }
+.politica > p { margin-top: 16px; }
+.politica-data + p { margin-top: 40px; }
+.politica h2 { margin-top: 48px; font-weight: 600; font-size: 20px; line-height: 1.4; }
+.politica ul { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; padding-left: 20px; list-style: disc; }
+.politica strong { font-weight: 600; color: var(--texto); }
+.politica a { color: var(--azul); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+
+/* tabela de cookies: rola na horizontal no celular */
+.politica-tabela {
+  margin-top: 20px;
+  overflow-x: auto;
+  border: 1px solid rgba(10, 85, 174, 0.1);
+  border-radius: 16px;
+  background: var(--branco);
+}
+.politica table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 14px; line-height: 1.5; }
+.politica th,
+.politica td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(10, 85, 174, 0.08);
+  text-align: left;
+  vertical-align: top;
+  color: var(--texto-80);
+}
+.politica th { font-weight: 600; color: var(--texto); background: var(--gelo); }
+.politica tr:last-child td { border-bottom: 0; }
+.politica td:first-child { font-weight: 500; white-space: nowrap; color: var(--texto); }
+
+.politica-rodape {
+  padding: 32px 0;
+  border-top: 1px solid rgba(10, 85, 174, 0.1);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--cinza);
+}
+
+@media (max-width: 1023px) {
+  .politica { padding: 48px 0 72px; }
+  .politica h2 { margin-top: 40px; font-size: 18px; }
+  .politica-voltar { font-size: 13px; }
 }

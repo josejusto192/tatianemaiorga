@@ -205,7 +205,7 @@ if (window.GTM_ID) {
   banner.setAttribute('role', 'dialog');
   banner.setAttribute('aria-label', 'Preferências de cookies');
   banner.innerHTML = `
-    <p class="cookies__texto">Usamos cookies para entender como o site é usado e medir nossos anúncios. Você escolhe o que permitir.</p>
+    <p class="cookies__texto">Usamos cookies para entender como o site é usado e medir nossos anúncios. Você escolhe o que permitir. <a href="politica-de-privacidade.html">Política de privacidade</a></p>
     <div class="cookies__opcoes" hidden>
       <label><input type="checkbox" name="estatistica"> <span><strong>Estatísticas</strong> Google Analytics</span></label>
       <label><input type="checkbox" name="marketing"> <span><strong>Marketing</strong> Google Ads e Meta</span></label>
@@ -244,14 +244,17 @@ if (window.GTM_ID) {
   link.type = 'button';
   link.className = 'rodape-cookies';
   link.textContent = 'Preferências de cookies';
-  link.addEventListener('click', () => {
+  const preferencias = () => {
     opcoes.hidden = false;
     const btn = banner.querySelector('[data-acao="personalizar"], [data-acao="salvar"]');
     btn.textContent = 'Salvar escolhas';
     btn.dataset.acao = 'salvar';
     abrir();
-  });
-  document.querySelector('.rodape-marca')?.append(link);
+  };
+  link.addEventListener('click', preferencias);
+  document.querySelector('.rodape-legal')?.append(link);
 
-  if (!lerConsentimento()) abrir();
+  // "Preferências de cookies" na página da política aponta para ./#cookies
+  if (location.hash === '#cookies') preferencias();
+  else if (!lerConsentimento()) abrir();
 }
