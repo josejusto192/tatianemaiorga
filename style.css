@@ -217,6 +217,9 @@ main, .fim { overflow-x: clip; }
   height: 79px;
   translate: -50% 0;
   background: url("assets/onda-hero.svg") 0 0 / 100% 100% no-repeat;
+  /* telas mais largas que a onda (ultra-wide, zoom reduzido): a ponta cheia continua até a borda
+     com a mesma cor; a curva fica no mesmo lugar do Figma (sombra sobrepõe 1px para não criar linha) */
+  box-shadow: -4616.72px 0 0 #ebf1f6, 4616.72px 0 0 #ebf1f6;
   pointer-events: none;
 }
 
@@ -476,6 +479,7 @@ main, .fim { overflow-x: clip; }
     width: 1827.62px;
     height: 33px;
     background-image: url("assets/onda-hero-mobile.svg");
+    box-shadow: none;
   }
 
   .cabecalho { padding-top: 17px; }
@@ -568,6 +572,7 @@ main, .fim { overflow-x: clip; }
   height: 45px;
   translate: -50% 0;
   background: url("assets/onda-dores.svg") 0 0 / 100% 100% no-repeat;
+  box-shadow: -3266.5px 0 0 #f6f2ec, 3266.5px 0 0 #f6f2ec; /* ver nota da onda do hero */
   pointer-events: none;
 }
 
@@ -746,6 +751,7 @@ main, .fim { overflow-x: clip; }
   width: 2426.5px;
   height: 45px;
   background: url("assets/onda-como-funciona.svg") 0 0 / 100% 100% no-repeat;
+  box-shadow: -2425.5px 0 0 var(--branco); /* ver nota da onda do hero */
   pointer-events: none;
 }
 .como-funciona .container {
@@ -1789,6 +1795,7 @@ main, .fim { overflow-x: clip; }
   height: 45px;
   rotate: 180deg;
   background: url("assets/onda-servicos.svg") 0 0 / 100% 100% no-repeat;
+  box-shadow: -2425.5px 0 0 #08213f; /* girada 180°: estende a ponta escura da direita (ver nota da onda do hero) */
   pointer-events: none;
 }
 .servicos .container { position: relative; }
@@ -2091,6 +2098,9 @@ main, .fim { overflow-x: clip; }
   --faq-resto: 249px; /* o fundo azul-claro da FAQ continua por trás do topo do card */
   background:
     url("assets/onda-cta.svg") 50% var(--faq-resto) / 3355.5px 45px no-repeat,
+    /* telas mais largas que a onda: as pontas azul-claras continuam até as bordas */
+    linear-gradient(#f0f4f9, #f0f4f9) left var(--faq-resto) / max(0px, 50% - 1676.75px) 45px no-repeat,
+    linear-gradient(#f0f4f9, #f0f4f9) right var(--faq-resto) / max(0px, 50% - 1676.75px) 45px no-repeat,
     linear-gradient(#f0f4f9, #f0f4f9) 0 0 / 100% calc(var(--faq-resto) + 1px) no-repeat, /* +1px por baixo da onda */
     url("data:image/svg+xml;utf8,<svg viewBox='0 0 1920 563' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect width='100%' height='100%' fill='url(%23g)'/><defs><radialGradient id='g' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(-70.25 52.154 -119.31 -85.028 1662.5 41.461)'><stop stop-color='rgba(246,242,236,0.5)'/><stop offset='1' stop-color='rgba(246,242,236,0.92549)'/></radialGradient></defs></svg>") 0 var(--faq-resto) / 100% calc(100% - var(--faq-resto)) no-repeat,
     var(--branco);
