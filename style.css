@@ -528,8 +528,8 @@ main, .fim { overflow-x: clip; }
   }
   .hero-eyebrow { gap: 7px; font-size: 12px; }
   /* linhas com o itálico de 34px ditam a altura (34 × 1.2) */
-  .hero-titulo { font-size: 28px; line-height: 40.8px; }
-  .hero-titulo em { font-size: 34px; }
+  .hero-titulo { font-size: 28px; line-height: calc(40.8 / 28); }
+  .hero-titulo em { font-size: calc(34em / 28); }
   .hero-sub { width: auto; margin-top: 32px; font-size: 16px; }
   .hero-conteudo .btn-cta { margin-top: 32px; }
 
@@ -702,7 +702,7 @@ main, .fim { overflow-x: clip; }
 @media (max-width: 1023px) {
   .titulo-secao { font-size: 28px; }
   /* a linha com o itálico de 34px fica mais alta, como no Figma */
-  .titulo-secao em { font-size: 34px; line-height: 1.56; }
+  .titulo-secao em { font-size: calc(34em / 28); line-height: 1.56; }
   .texto-secao { font-size: 16px; }
 
   .dores {
@@ -917,7 +917,7 @@ main, .fim { overflow-x: clip; }
   }
 
   .cf-conteudo { flex: none; margin: 0; }
-  .cf-conteudo .titulo-secao em { font-size: 34px; line-height: 1.56; }
+  .cf-conteudo .titulo-secao em { font-size: calc(34em / 28); line-height: 1.56; }
   .cf-conteudo > .texto-secao { margin-top: 36px; }
 
   .etapas { margin-top: 36px; }
@@ -1138,7 +1138,7 @@ main, .fim { overflow-x: clip; }
     margin-bottom: -60px;
     padding: 60px 0;
   }
-  .fases-cabecalho .titulo-secao em { font-size: 34px; }
+  .fases-cabecalho .titulo-secao em { font-size: calc(34em / 28); }
   .fases-cabecalho .texto-secao { width: auto; }
 
   /* carrossel horizontal, de borda a borda da tela */
@@ -1392,8 +1392,8 @@ main, .fim { overflow-x: clip; }
 
   .familia-conteudo { flex: none; margin-top: 0; }
   /* no Figma mobile o destaque quebra entre as linhas e é maior (36px) */
-  .familia .titulo-secao { line-height: 48.4px; } /* altura das duas linhas igual ao Figma (68px) */
-  .familia .titulo-secao em { font-size: 36px; line-height: 1; white-space: normal; }
+  .familia .titulo-secao { line-height: calc(48.4 / 28); } /* altura das duas linhas igual ao Figma (68px) */
+  .familia .titulo-secao em { font-size: calc(36em / 28); line-height: 1; white-space: normal; }
   .familia-conteudo > .texto-secao { font-size: 16px; }
   .familia-item h3 { font-size: 16px; }
   .familia-item--nota > p { flex: 1; max-width: none; }
@@ -1622,8 +1622,8 @@ main, .fim { overflow-x: clip; }
 
   .sobre-conteudo { flex: none; margin: 0; }
   /* no Figma mobile o destaque quebra entre as linhas (como no hero) */
-  .sobre .titulo-secao { line-height: 40.8px; }
-  .sobre .titulo-secao em { font-size: 34px; line-height: 1; white-space: normal; }
+  .sobre .titulo-secao { line-height: calc(40.8 / 28); }
+  .sobre .titulo-secao em { font-size: calc(34em / 28); line-height: 1; white-space: normal; }
   .sobre-credenciais { gap: 12px; }
   .sobre-credenciais li { font-size: 12px; }
   .sobre-citacao blockquote { font-size: 18px; }
@@ -1768,7 +1768,7 @@ main, .fim { overflow-x: clip; }
     padding: 60px 0;
   }
   .depoimentos .titulo-secao { padding-top: 0; }
-  .depoimentos .titulo-secao em { font-size: 36px; line-height: 1.5; }
+  .depoimentos .titulo-secao em { font-size: calc(36em / 28); line-height: 1.5; }
   .depo-carrossel { margin-top: 36px; }
   .depo-card { padding: 24px 20px; }
   .depo-rodape { margin-top: 36px; }
@@ -1899,7 +1899,7 @@ main, .fim { overflow-x: clip; }
   .servicos { padding: 60px 0; }
   .servicos::before { display: none; }
   .servicos .cabecalho-duplo { align-items: center; text-align: center; }
-  .servicos .titulo-secao em { font-size: 35px; line-height: 1.56; }
+  .servicos .titulo-secao em { font-size: calc(35em / 28); line-height: 1.56; }
 
   .servicos-cards { grid-template-columns: 1fr; margin-top: 36px; }
   .card-servico { padding: 28px 20px; }
@@ -2058,8 +2058,8 @@ main, .fim { overflow-x: clip; }
     background: linear-gradient(#f0f4f9, #f0f4f9) 0 0 / 100% 968px no-repeat, var(--branco);
   }
   /* no Figma o espaço antes do itálico também tem 34px e deixa a 1ª linha mais alta (título com 65px) */
-  .faq .titulo-secao { padding-top: 0; line-height: 41px; }
-  .faq .titulo-secao em { font-size: 34px; }
+  .faq .titulo-secao { padding-top: 0; line-height: calc(41 / 28); }
+  .faq .titulo-secao em { font-size: calc(34em / 28); }
   .faq-conteudo { flex-direction: column; gap: 38px; margin-top: 38px; }
   .faq-contato { width: auto; }
   .faq-contato__titulo { padding-top: 0; }
@@ -2156,8 +2156,8 @@ main, .fim { overflow-x: clip; }
     text-align: center;
   }
   /* linhas na altura do itálico de 34px, que quebra entre a 2ª e a 3ª linha (102px no Figma) */
-  .cta-card .titulo-secao { line-height: 40.8px; }
-  .cta-card .titulo-secao em { font-size: 34px; line-height: 1; white-space: normal; }
+  .cta-card .titulo-secao { line-height: calc(40.8 / 28); }
+  .cta-card .titulo-secao em { font-size: calc(34em / 28); line-height: 1; white-space: normal; }
 }
 
 /* ==========================================================================
@@ -2309,13 +2309,14 @@ main, .fim { overflow-x: clip; }
   .escuro .hero-badge--quebra   { left: calc(3.12 * var(--u));   top: calc(457.16 * var(--u)); }
 }
 
-/* Celulares mais estreitos que o Figma mobile (420px): o destaque em itálico pode quebrar
-   e as linhas se equilibram, para não sobrar uma palavra sozinha numa linha curta.
-   A partir de 420px as quebras seguem exatamente o Figma. */
+/* Celulares mais estreitos que o Figma mobile (420px, coluna de texto de 380px): os títulos
+   encolhem na mesma proporção da coluna, então as quebras de linha ficam iguais às do Figma
+   (ex.: iPhone 14, 390px → título com 25,8px em vez de 28px). */
 @media (max-width: 419px) {
-  .titulo-secao { text-wrap: balance; }
-  .titulo-secao em { white-space: normal; }
+  .hero-titulo,
+  .titulo-secao { font-size: calc((100vw - 40px) * 28 / 380); }
 }
+
 
 /* ==========================================================================
    Botão flutuante do WhatsApp (canto inferior direito, verde oficial)
