@@ -166,18 +166,104 @@ if (familia) {
 }
 
 // Rastreamento: cada clique num link do WhatsApp vira o evento "contato_whatsapp",
-// com o local do botão (data-local). O site não envia nada sozinho: só entrega o evento
-// ao gerenciador de tags instalado (Cloudflare Zaraz e/ou Google Tag Manager), que decide
-// para onde vai (GA4, Google Ads, Meta) conforme o consentimento. Sem dados pessoais
-// e sem o texto da mensagem.
+// com o local do botão (data-local). O site só entrega o evento ao Google Tag Manager
+// (dataLayer), que decide para onde vai (GA4, Google Ads, Meta) conforme o consentimento.
+// Sem dados pessoais e sem o texto da mensagem.
 window.dataLayer = window.dataLayer || [];
+
+function lerConsentimento() {
+  try { return JSON.parse(localStorage.getItem('consentimento')); } catch { return null; }
+}
+
 function rastrear(evento, dados) {
-  // event_id igual no navegador e no servidor evita contar a conversão duas vezes (Meta CAPI)
+  // o mesmo event_id vai no pixel (navegador) e na API de Conversões (servidor): a Meta conta uma vez só
   const comId = { ...dados, event_id: crypto.randomUUID?.() ?? String(Date.now()) + Math.random() };
   window.dataLayer.push({ event: evento, ...comId });
-  window.zaraz?.track?.(evento, comId);
+  enviarParaMeta(evento, comId);
 }
+
+// API de Conversões da Meta: avisa a função do Cloudflare (functions/api/meta-evento.js),
+// só com o GTM ativo e com consentimento de marketing
+function enviarParaMeta(evento, dados) {
+  if (!window.GTM_ID || !lerConsentimento()?.marketing || !navigator.sendBeacon) return;
+  const cookie = (nome) => document.cookie.match('(?:^|; )' + nome + '=([^;]*)')?.[1];
+  navigator.sendBeacon('/api/meta-evento', JSON.stringify({
+    evento, event_id: dados.event_id, local: dados.local, pagina: location.href,
+    fbp: cookie('_fbp'), fbc: cookie('_fbc'),
+  }));
+}
+
 document.addEventListener('click', (e) => {
   const link = e.target.closest('a[href*="wa.me/"]');
   if (link) rastrear('contato_whatsapp', { local: link.dataset.local || 'outro' });
 });
+
+// Banner de cookies (LGPD): só aparece com o GTM ativo e enquanto a pessoa não escolheu.
+// A escolha atualiza o Modo de Consentimento do Google e avisa o GTM ("consentimento_atualizado").
+if (window.GTM_ID) {
+  const salvar = (estatistica, marketing) => {
+    try { localStorage.setItem('consentimento', JSON.stringify({ estatistica, marketing, data: new Date().toISOString() })); } catch {}
+    gtag('consent', 'update', {
+      analytics_storage: estatistica ? 'granted' : 'denied',
+      ad_storage: marketing ? 'granted' : 'denied',
+      ad_user_data: marketing ? 'granted' : 'denied',
+      ad_personalization: marketing ? 'granted' : 'denied',
+    });
+    window.dataLayer.push({ event: 'consentimento_atualizado', consentimento_estatistica: estatistica, consentimento_marketing: marketing });
+  };
+
+  const banner = document.createElement('div');
+  banner.className = 'cookies';
+  banner.setAttribute('role', 'dialog');
+  banner.setAttribute('aria-label', 'Preferências de cookies');
+  banner.innerHTML = `
+    <p class="cookies__texto">Usamos cookies para entender como o site é usado e medir nossos anúncios. Você escolhe o que permitir.</p>
+    <div class="cookies__opcoes" hidden>
+      <label><input type="checkbox" name="estatistica"> <span><strong>Estatísticas</strong> Google Analytics</span></label>
+      <label><input type="checkbox" name="marketing"> <span><strong>Marketing</strong> Google Ads e Meta</span></label>
+    </div>
+    <div class="cookies__acoes">
+      <button type="button" class="cookies__btn cookies__btn--link" data-acao="personalizar">Personalizar</button>
+      <button type="button" class="cookies__btn cookies__btn--sec" data-acao="recusar">Recusar</button>
+      <button type="button" class="cookies__btn" data-acao="aceitar">Aceitar</button>
+    </div>`;
+  const opcoes = banner.querySelector('.cookies__opcoes');
+  const caixa = (nome) => banner.querySelector(`input[name="${nome}"]`);
+
+  const abrir = () => {
+    const c = lerConsentimento();
+    caixa('estatistica').checked = !!c?.estatistica;
+    caixa('marketing').checked = !!c?.marketing;
+    document.body.append(banner);
+    document.body.classList.add('cookies-aberto');
+  };
+  const fechar = () => { banner.remove(); document.body.classList.remove('cookies-aberto'); };
+
+  banner.addEventListener('click', (e) => {
+    const acao = e.target.closest('[data-acao]')?.dataset.acao;
+    if (acao === 'aceitar') { salvar(true, true); fechar(); }
+    if (acao === 'recusar') { salvar(false, false); fechar(); }
+    if (acao === 'salvar') { salvar(caixa('estatistica').checked, caixa('marketing').checked); fechar(); }
+    if (acao === 'personalizar') {
+      opcoes.hidden = false;
+      e.target.textContent = 'Salvar escolhas';
+      e.target.dataset.acao = 'salvar';
+    }
+  });
+
+  // link no rodapé para mudar a escolha depois
+  const link = document.createElement('button');
+  link.type = 'button';
+  link.className = 'rodape-cookies';
+  link.textContent = 'Preferências de cookies';
+  link.addEventListener('click', () => {
+    opcoes.hidden = false;
+    const btn = banner.querySelector('[data-acao="personalizar"], [data-acao="salvar"]');
+    btn.textContent = 'Salvar escolhas';
+    btn.dataset.acao = 'salvar';
+    abrir();
+  });
+  document.querySelector('.rodape-marca')?.append(link);
+
+  if (!lerConsentimento()) abrir();
+}

@@ -27,6 +27,26 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Tatiane Maiorga, psicóloga infantil, no consultório, ao lado da frase: Entenda o que seu filho está vivendo. Encontre caminhos para ajudá-lo.">
   <meta name="twitter:card" content="summary_large_image">
+  <!-- Rastreamento: Google Tag Manager. Para ativar, preencha o ID do contêiner (ex.: 'GTM-ABC1234').
+       Vazio = nenhuma tag carrega e o banner de cookies não aparece. Tags, eventos e IDs ficam no painel do GTM. -->
+  <script>
+    window.GTM_ID = '';
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    // LGPD: tudo negado até a pessoa escolher no banner (Modo de Consentimento v2 do Google)
+    gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' });
+    gtag('set', 'ads_data_redaction', true);
+    try {
+      var c = JSON.parse(localStorage.getItem('consentimento'));
+      if (c) gtag('consent', 'update', { analytics_storage: c.estatistica ? 'granted' : 'denied', ad_storage: c.marketing ? 'granted' : 'denied',
+        ad_user_data: c.marketing ? 'granted' : 'denied', ad_personalization: c.marketing ? 'granted' : 'denied' });
+    } catch (e) {}
+    if (window.GTM_ID) {
+      dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+      var g = document.createElement('script'); g.async = true; g.src = 'https://www.googletagmanager.com/gtm.js?id=' + window.GTM_ID;
+      document.head.appendChild(g);
+    }
+  </script>
   <link rel="preload" href="assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/newsreader-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
