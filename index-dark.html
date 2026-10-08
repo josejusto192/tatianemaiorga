@@ -180,7 +180,7 @@
     <section class="como-funciona" id="como-funciona">
       <div class="container">
         <div class="cf-foto">
-          <img src="assets/como-funciona-foto.webp" alt="Tatiane Maiorga fazendo anotações no consultório" width="1536" height="1024" loading="lazy">
+          <img src="assets/como-funciona-mensagem.webp" alt="Mãe mandando mensagem pelo celular enquanto o filho brinca com blocos na sala" width="1024" height="1536" loading="lazy">
         </div>
 
         <div class="cf-conteudo">
@@ -339,21 +339,21 @@
           <p class="texto-secao">Cuidar de uma criança ou adolescente traz situações para as quais nem sempre há respostas prontas. No meu trabalho, pais e responsáveis fazem parte do processo: suas observações ajudam a entender o que acontece no dia a dia.</p>
 
           <ul class="familia-lista">
-            <li class="familia-item">
+            <li class="familia-item ativo" data-foto="0" tabindex="0" aria-current="true">
               <span class="familia-item__icone"><img src="assets/icone-escuta.svg" alt=""></span>
               <div>
                 <h3>Escuta para a família</h3>
                 <p>Um espaço para falar das dificuldades e entender as necessidades do seu filho.</p>
               </div>
             </li>
-            <li class="familia-item">
+            <li class="familia-item" data-foto="1" tabindex="0">
               <span class="familia-item__icone"><img src="assets/icone-orientacao.svg" alt=""></span>
               <div>
                 <h3>Orientação clara</h3>
                 <p>Caminhos para lidar com os desafios da rotina, considerando a realidade da sua casa.</p>
               </div>
             </li>
-            <li class="familia-item">
+            <li class="familia-item" data-foto="2" tabindex="0">
               <span class="familia-item__icone"><img src="assets/icone-casa.svg" alt=""></span>
               <div>
                 <h3>Continuidade em casa</h3>
@@ -369,7 +369,11 @@
 
         <div class="familia-foto">
           <div class="familia-foto__quadro">
-            <img src="assets/familia-foto.webp" alt="Mãe acompanhando o filho durante uma brincadeira no consultório" width="979" height="1224" loading="lazy">
+            <!-- uma foto por item; trocam sozinhas (script.js) -->
+            <img class="familia-slide ativo" src="assets/familia-escuta.webp" alt="Mãe e pai conversando, sentados no sofá" width="1000" height="1249" loading="lazy" style="--foco: 50% 22%">
+            <img class="familia-slide" src="assets/familia-orientacao.webp" alt="Mãe fazendo anotações em um caderno, com orientação" width="1000" height="1249" loading="lazy" style="--foco: 50% 58%">
+            <img class="familia-slide" src="assets/familia-continuidade.webp" alt="Pai ajudando o filho a fechar a mochila em casa" width="1000" height="1249" loading="lazy" style="--foco: 50% 30%">
+            <div class="familia-progresso" aria-hidden="true"><span></span><span></span><span></span></div>
           </div>
         </div>
       </div>

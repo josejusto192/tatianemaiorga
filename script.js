@@ -120,3 +120,47 @@ if (document.documentElement.classList.contains('revela')) {
     });
   }
 }
+
+// Família no processo: cada item tem uma foto; elas trocam sozinhas a cada 6s
+// (a barrinha do item atual enche e, ao terminar, passa para o próximo)
+const familia = document.querySelector('.familia');
+if (familia) {
+  const itens = [...familia.querySelectorAll('.familia-item[data-foto]')];
+  const fotos = [...familia.querySelectorAll('.familia-slide')];
+  const barras = [...familia.querySelectorAll('.familia-progresso span')];
+  let atual = 0;
+
+  const mostrar = (i) => {
+    atual = i;
+    itens.forEach((el, n) => {
+      el.classList.toggle('ativo', n === i);
+      if (n === i) el.setAttribute('aria-current', 'true');
+      else el.removeAttribute('aria-current');
+    });
+    fotos.forEach((el, n) => el.classList.toggle('ativo', n === i));
+    barras.forEach((el, n) => { el.classList.toggle('feito', n < i); el.classList.remove('atual'); });
+    void barras[i].offsetWidth; // reinicia a animação da barra
+    barras[i].classList.add('atual');
+  };
+  const pausar = (i) => { familia.classList.add('pausado'); mostrar(i); };
+  const retomar = () => { familia.classList.remove('pausado'); mostrar(atual); };
+
+  barras.forEach((b) => b.addEventListener('animationend', (e) => {
+    if (e.animationName === 'familia-carregar') mostrar((atual + 1) % itens.length);
+  }));
+
+  itens.forEach((el, i) => {
+    // mouse em cima: troca na hora e a contagem para; ao sair, recomeça dali
+    el.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') pausar(i); });
+    el.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') retomar(); });
+    // toque no celular: troca na hora e a contagem recomeça daquele item
+    el.addEventListener('click', () => { if (!familia.classList.contains('pausado')) mostrar(i); });
+    // teclado (Tab): igual ao mouse
+    el.addEventListener('focus', () => { if (el.matches(':focus-visible')) pausar(i); });
+    el.addEventListener('blur', () => { if (familia.classList.contains('pausado') && !el.matches(':hover')) retomar(); });
+  });
+
+  // fora da tela o tempo não corre
+  new IntersectionObserver(([e]) => familia.classList.toggle('fora', !e.isIntersecting)).observe(familia);
+  mostrar(0);
+}

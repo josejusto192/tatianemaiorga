@@ -779,7 +779,6 @@ main, .fim { overflow-x: clip; }
   border-radius: 28px;
   background: #e9e2d8;
   object-fit: cover;
-  object-position: 52% 50%;
 }
 
 .cf-conteudo {
@@ -1296,14 +1295,68 @@ main, .fim { overflow-x: clip; }
   border-radius: 28px;
   background: #e9e2d8;
 }
-/* recorte do Figma: foto deslocada 3,11% para cima; altura proporcional (sem esticar) */
-.familia-foto__quadro img {
+/* fotos que se dissolvem uma na outra; --foco ajusta o recorte de cada uma (pesa no mobile) */
+.familia-slide {
   position: absolute;
-  left: 0;
-  top: -3.11%;
+  inset: 0;
   width: 100%;
-  height: auto;
-  max-width: none;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--foco, 50% 50%);
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+.familia-slide.ativo { opacity: 1; }
+
+/* barrinhas de carregamento dentro da foto, a 20px das bordas */
+.familia-progresso {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1;
+  display: flex;
+  gap: 6px;
+}
+.familia-progresso span {
+  flex: 1;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.4);
+}
+.familia-progresso span::after {
+  content: "";
+  display: block;
+  height: 100%;
+  background: var(--branco);
+  transform-origin: left;
+  scale: 0 1;
+}
+.familia-progresso .feito::after { scale: 1 1; }
+.familia-progresso .atual::after { animation: familia-carregar 6s linear forwards; }
+/* mouse/teclado em cima de um item: a contagem para e a barra dele fica cheia */
+.familia.pausado .familia-progresso .atual::after { animation: none; scale: 1 1; }
+/* fora da tela: o tempo não corre */
+.familia.fora .familia-progresso .atual::after { animation-play-state: paused; }
+@keyframes familia-carregar { to { scale: 1 1; } }
+
+/* item em destaque: fundo branco e sombra leve; os outros mais apagados */
+.familia-item[data-foto] {
+  cursor: pointer;
+  transition: background-color 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease;
+}
+.familia-item[data-foto]:not(.ativo) { opacity: 0.55; }
+.familia-item.ativo {
+  background: var(--branco);
+  box-shadow: 0 14px 30px -20px rgba(11, 42, 79, 0.3);
+}
+.familia-item[data-foto]:focus-visible { outline: 2px solid var(--azul); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  /* sem troca automática: as fotos só mudam no hover/toque, sem dissolver */
+  .familia-progresso .atual::after { animation: none; scale: 1 1; }
+  .familia-slide, .familia-item[data-foto] { transition: none; }
 }
 
 @media (max-width: 1023px) {
@@ -1333,7 +1386,6 @@ main, .fim { overflow-x: clip; }
     height: 340px;
     border-radius: 20.437px;
   }
-  .familia-foto__quadro img { top: 0; height: 100%; object-fit: cover; }
 
   .familia-conteudo { flex: none; margin-top: 0; }
   /* no Figma mobile o destaque quebra entre as linhas e é maior (36px) */
