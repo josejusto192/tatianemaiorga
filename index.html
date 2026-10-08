@@ -27,6 +27,166 @@
   <link rel="preload" href="assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/newsreader-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
+  <!-- Dados estruturados (schema.org) para buscadores -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://tatianemaiorga.vercel.app/#site",
+        "url": "https://tatianemaiorga.vercel.app/",
+        "name": "Tatiane Maiorga — Psicologia & Neuropsicologia",
+        "inLanguage": "pt-BR",
+        "publisher": {
+          "@id": "https://tatianemaiorga.vercel.app/#consultorio"
+        }
+      },
+      {
+        "@type": "MedicalBusiness",
+        "@id": "https://tatianemaiorga.vercel.app/#consultorio",
+        "name": "Tatiane Maiorga Psicologia e Neuropsicologia",
+        "legalName": "Tatiane Maiorga Psicologia e Neuropsicologia Ltda - ME",
+        "taxID": "53.846.377/0001-22",
+        "description": "Psicoterapia e avaliação neuropsicológica para crianças e adolescentes, com a família orientada em cada etapa. Presencial em São Paulo/SP e online.",
+        "url": "https://tatianemaiorga.vercel.app/",
+        "image": "https://tatianemaiorga.vercel.app/assets/og-imagem.jpg",
+        "logo": "https://tatianemaiorga.vercel.app/assets/logotipo.webp",
+        "telephone": "+55 11 96844-5868",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Rua Padre Chico, 221 - Conjunto 206 - Perdizes",
+          "addressLocality": "São Paulo",
+          "addressRegion": "SP",
+          "postalCode": "05008-010",
+          "addressCountry": "BR"
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "São Paulo"
+          },
+          {
+            "@type": "Country",
+            "name": "Brasil"
+          }
+        ],
+        "sameAs": [
+          "https://www.instagram.com/psicologa_tatiane_maiorga/"
+        ],
+        "founder": {
+          "@id": "https://tatianemaiorga.vercel.app/#tatiane"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Serviços",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Psicoterapia infantil e para adolescentes",
+                "description": "Terapia Cognitivo-Comportamental para lidar com emoções e comportamento; com os pequenos, brincadeiras e jogos fazem parte do processo."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Avaliação neuropsicológica",
+                "description": "Para entender atenção, aprendizagem e desenvolvimento; pode fazer parte da investigação de TDAH, TEA e dificuldades de aprendizagem."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Reabilitação neuropsicológica",
+                "description": "Acompanhamento com estratégias organizadas para o perfil da criança, com reflexos em casa e na escola."
+              }
+            }
+          ]
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://tatianemaiorga.vercel.app/#tatiane",
+        "name": "Tatiane André Maiorga",
+        "jobTitle": "Psicóloga infantil e para adolescentes, especialista em Neuropsicologia",
+        "image": "https://tatianemaiorga.vercel.app/assets/sobre-foto-1.webp",
+        "worksFor": {
+          "@id": "https://tatianemaiorga.vercel.app/#consultorio"
+        },
+        "knowsAbout": [
+          "Psicologia infantil",
+          "Psicologia do adolescente",
+          "Neuropsicologia",
+          "Avaliação neuropsicológica",
+          "Reabilitação neuropsicológica",
+          "Terapia Cognitivo-Comportamental"
+        ],
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "name": "CRP 06/141102",
+          "credentialCategory": "Registro profissional",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "Conselho Regional de Psicologia de São Paulo (CRP-06)"
+          }
+        },
+        "sameAs": [
+          "https://www.instagram.com/psicologa_tatiane_maiorga/"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://tatianemaiorga.vercel.app/#duvidas",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Quanto custa o atendimento?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "O valor depende do serviço: psicoterapia, avaliação ou reabilitação neuropsicológica. Eu informo tudo pelo WhatsApp antes de qualquer agendamento, sem compromisso."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Você atende por convênio?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Não. O atendimento é particular. Valores e formas de pagamento são informados pelo WhatsApp."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quanto tempo dura o acompanhamento?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Depende da necessidade do seu filho e dos objetivos definidos juntos. Os próximos passos são conversados com você ao longo do processo."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "É melhor presencial ou online?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Atendo presencialmente em São Paulo/SP e também online. A modalidade mais adequada depende do serviço e das necessidades do seu filho, e conversamos sobre isso antes de começar."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Como é a primeira sessão se meu filho é pequeno e não sabe explicar o que sente?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ele não precisa explicar. Com crianças pequenas, o processo é lúdico: brincadeiras e jogos ajudam a criança a se expressar do jeito dela. Você também é ouvido, para que eu entenda o que acontece em casa e na escola."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
   <!-- liga as entradas ao rolar já no carregamento (evita o conteúdo aparecer e sumir) -->
   <script>if (matchMedia('(prefers-reduced-motion: no-preference)').matches) document.documentElement.classList.add('revela');</script>
 </head>
@@ -78,8 +238,8 @@
 
       <div class="hero-visual">
         <span class="hero-anel" aria-hidden="true"></span>
-        <img class="hero-foto" src="assets/hero-foto.webp" alt="Tatiane Maiorga em seu consultório" width="1040" height="1300">
-        <img class="hero-recorte" src="assets/hero-recorte.webp" alt="" width="1040" height="1300">
+        <img class="hero-foto" src="assets/hero-foto.webp" alt="Tatiane Maiorga em seu consultório" width="1040" height="1300" fetchpriority="high">
+        <img class="hero-recorte" src="assets/hero-recorte.webp" alt="" width="1040" height="1300" fetchpriority="high">
         <!-- recorte da versão escura (desktop); oculto na clara, então não chega a carregar -->
         <img class="hero-recorte hero-recorte--escuro" src="assets/hero-recorte-escuro.webp" alt="" width="820" height="1024" loading="lazy">
         <span class="hero-badge hero-badge--cerebro"><img src="assets/icone-cerebro.svg" alt=""></span>
@@ -686,7 +846,7 @@
           <p>Psicoterapia e avaliação neuropsicológica para crianças e adolescentes, com a família no processo.</p>
         </div>
         <div class="rodape-coluna rodape-coluna--profissional">
-          <h2 class="rodape-titulo">Profissional</h2>
+          <p class="rodape-titulo">Profissional</p>
           <ul class="rodape-lista">
             <li><strong>Tatiane André Maiorga</strong></li>
             <li>Psicóloga, especialista em<br>Neuropsicologia</li>
@@ -694,7 +854,7 @@
           </ul>
         </div>
         <div class="rodape-coluna rodape-coluna--atendimento">
-          <h2 class="rodape-titulo">Atendimento</h2>
+          <p class="rodape-titulo">Atendimento</p>
           <ul class="rodape-lista">
             <li>Crianças e adolescentes</li>
             <li>Presencial em São Paulo/SP</li>
@@ -702,7 +862,7 @@
           </ul>
         </div>
         <div class="rodape-coluna">
-          <h2 class="rodape-titulo">Contato</h2>
+          <p class="rodape-titulo">Contato</p>
           <ul class="rodape-lista rodape-contatos">
             <li><a href="https://wa.me/5511968445868" target="_blank" rel="noopener"><span class="rodape-icone"><img src="assets/icone-rodape-whatsapp.svg" alt=""></span><span>(11) 96844-5868</span></a></li>
             <li><a href="https://www.instagram.com/psicologa_tatiane_maiorga/" target="_blank" rel="noopener"><span class="rodape-icone"><img src="assets/icone-rodape-instagram.svg" alt=""></span><span>@psicologa_tatiane_maiorga</span></a></li>
