@@ -128,6 +128,14 @@
                 "name": "Reabilitação neuropsicológica",
                 "description": "Acompanhamento com estratégias organizadas para o perfil da criança, com reflexos em casa e na escola."
               }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Orientação de pais",
+                "description": "Encontros com pais e responsáveis para entender o comportamento do filho e construir formas de agir em casa: rotina, limites e conversas do dia a dia."
+              }
             }
           ]
         },
@@ -153,6 +161,7 @@
           "Neuropsicologia",
           "Avaliação neuropsicológica",
           "Reabilitação neuropsicológica",
+          "Orientação de pais",
           "Terapia Cognitivo-Comportamental"
         ],
         "hasCredential": {
@@ -177,7 +186,7 @@
             "name": "Quanto custa o atendimento?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "O valor depende do serviço: psicoterapia, avaliação ou reabilitação neuropsicológica. Eu informo tudo pelo WhatsApp antes de qualquer agendamento, sem compromisso."
+              "text": "O valor depende do serviço: psicoterapia, orientação de pais, avaliação ou reabilitação neuropsicológica. Eu informo tudo pelo WhatsApp antes de qualquer agendamento, sem compromisso."
             }
           },
           {
@@ -577,6 +586,7 @@
           <li><span>Psicoterapia</span></li>
           <li><span>Avaliação neuropsicológica</span></li>
           <li><span>Reabilitação neuropsicológica</span></li>
+          <li><span>Orientação de pais</span></li>
         </ul>
         <ul class="faixa__lista" aria-hidden="true">
           <li><span>CRP 06/141102</span></li>
@@ -585,6 +595,7 @@
           <li><span>Psicoterapia</span></li>
           <li><span>Avaliação neuropsicológica</span></li>
           <li><span>Reabilitação neuropsicológica</span></li>
+          <li><span>Orientação de pais</span></li>
         </ul>
       </div>
     </section>
@@ -692,27 +703,71 @@
           <p class="texto-secao">O serviço indicado depende da necessidade de cada criança ou adolescente. Você pode entrar em contato mesmo sem saber qual procurar.</p>
         </div>
 
+        <!-- um card aberto por vez: abre ao passar o mouse, ao tocar ou pelo teclado (script.js) -->
         <div class="servicos-cards">
-          <article class="card-servico">
-            <span class="card-servico__icone"><img src="assets/icone-servico-psicoterapia.svg" alt=""></span>
-            <h3>Psicoterapia</h3>
-            <p class="card-servico__sub">Para lidar com emoções e comportamento.</p>
-            <p class="card-servico__texto">Um espaço para acolher emoções e trabalhar as dificuldades em casa, na escola e nas relações. Uso a Terapia Cognitivo-Comportamental. Com os pequenos, brincadeiras e jogos fazem parte do processo.</p>
-            <ul class="card-servico__tags"><li>Crises e birras</li><li>Ansiedade</li><li>Adolescência</li></ul>
+          <article class="card-servico ativo">
+            <div class="card-servico__cabeca">
+              <span class="card-servico__icone"><img src="assets/icone-servico-psicoterapia.svg" alt=""></span>
+              <div>
+                <h3><button class="card-servico__botao" type="button" aria-expanded="true" aria-controls="servico-psicoterapia">Psicoterapia</button></h3>
+                <p class="card-servico__sub">Para lidar com emoções e comportamento.</p>
+              </div>
+              <span class="card-servico__sinal" aria-hidden="true"></span>
+            </div>
+            <div class="card-servico__mais" id="servico-psicoterapia">
+              <div>
+                <p class="card-servico__texto">Um espaço para acolher emoções e trabalhar as dificuldades em casa, na escola e nas relações. Uso a Terapia Cognitivo-Comportamental. Com os pequenos, brincadeiras e jogos fazem parte do processo.</p>
+                <ul class="card-servico__tags"><li>Crises e birras</li><li>Ansiedade</li><li>Adolescência</li></ul>
+              </div>
+            </div>
           </article>
-          <article class="card-servico card-servico--destaque">
-            <span class="card-servico__icone"><img src="assets/icone-servico-avaliacao.svg" alt=""></span>
-            <h3>Avaliação neuropsicológica</h3>
-            <p class="card-servico__sub">Para entender atenção, aprendizagem e desenvolvimento.</p>
-            <p class="card-servico__texto">Busca compreender o perfil cognitivo e comportamental do seu filho. Pode fazer parte da investigação de TDAH, TEA e dificuldades de aprendizagem, conforme a indicação de cada caso.</p>
-            <ul class="card-servico__tags"><li>Pedido da escola</li><li>TDAH</li><li>TEA</li></ul>
+          <article class="card-servico">
+            <div class="card-servico__cabeca">
+              <span class="card-servico__icone"><img src="assets/icone-servico-avaliacao.svg" alt=""></span>
+              <div>
+                <h3><button class="card-servico__botao" type="button" aria-expanded="false" aria-controls="servico-avaliacao">Avaliação neuropsicológica</button></h3>
+                <p class="card-servico__sub">Para entender atenção, aprendizagem e desenvolvimento.</p>
+              </div>
+              <span class="card-servico__sinal" aria-hidden="true"></span>
+            </div>
+            <div class="card-servico__mais" id="servico-avaliacao" inert>
+              <div>
+                <p class="card-servico__texto">Busca compreender o perfil cognitivo e comportamental do seu filho. Pode fazer parte da investigação de TDAH, TEA e dificuldades de aprendizagem, conforme a indicação de cada caso.</p>
+                <ul class="card-servico__tags"><li>Pedido da escola</li><li>TDAH</li><li>TEA</li></ul>
+              </div>
+            </div>
           </article>
           <article class="card-servico">
-            <span class="card-servico__icone"><img src="assets/icone-servico-reabilitacao.svg" alt=""></span>
-            <h3>Reabilitação neuropsicológica</h3>
-            <p class="card-servico__sub">Para trabalhar dificuldades no dia a dia.</p>
-            <p class="card-servico__texto">Um acompanhamento com estratégias organizadas para o perfil do seu filho e para os objetivos definidos juntos, com reflexos no cotidiano em casa e na escola.</p>
-            <ul class="card-servico__tags"><li>Atenção</li><li>Aprendizagem</li><li>Rotina</li></ul>
+            <div class="card-servico__cabeca">
+              <span class="card-servico__icone"><img src="assets/icone-servico-reabilitacao.svg" alt=""></span>
+              <div>
+                <h3><button class="card-servico__botao" type="button" aria-expanded="false" aria-controls="servico-reabilitacao">Reabilitação neuropsicológica</button></h3>
+                <p class="card-servico__sub">Para trabalhar dificuldades no dia a dia.</p>
+              </div>
+              <span class="card-servico__sinal" aria-hidden="true"></span>
+            </div>
+            <div class="card-servico__mais" id="servico-reabilitacao" inert>
+              <div>
+                <p class="card-servico__texto">Um acompanhamento com estratégias organizadas para o perfil do seu filho e para os objetivos definidos juntos, com reflexos no cotidiano em casa e na escola.</p>
+                <ul class="card-servico__tags"><li>Atenção</li><li>Aprendizagem</li><li>Rotina</li></ul>
+              </div>
+            </div>
+          </article>
+          <article class="card-servico">
+            <div class="card-servico__cabeca">
+              <span class="card-servico__icone"><img src="assets/icone-servico-orientacao.svg" alt=""></span>
+              <div>
+                <h3><button class="card-servico__botao" type="button" aria-expanded="false" aria-controls="servico-orientacao">Orientação de pais</button></h3>
+                <p class="card-servico__sub">Para saber como agir em casa.</p>
+              </div>
+              <span class="card-servico__sinal" aria-hidden="true"></span>
+            </div>
+            <div class="card-servico__mais" id="servico-orientacao" inert>
+              <div>
+                <p class="card-servico__texto">Encontros com pais e responsáveis para entender o que está por trás do comportamento do seu filho e construir, juntos, formas de agir no dia a dia: rotina, limites e conversas em casa.</p>
+                <ul class="card-servico__tags"><li>Limites</li><li>Comunicação</li><li>Rotina da casa</li></ul>
+              </div>
+            </div>
           </article>
         </div>
 
@@ -742,7 +797,7 @@
               <img class="faq-item__abrir" src="assets/faq-abrir.svg" alt="">
               <img class="faq-item__fechar" src="assets/faq-fechar.svg" alt="">
             </summary>
-            <p>O valor depende do serviço: psicoterapia, avaliação ou reabilitação neuropsicológica. Eu informo tudo pelo WhatsApp antes de qualquer agendamento, sem compromisso.</p>
+            <p>O valor depende do serviço: psicoterapia, orientação de pais, avaliação ou reabilitação neuropsicológica. Eu informo tudo pelo WhatsApp antes de qualquer agendamento, sem compromisso.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary>

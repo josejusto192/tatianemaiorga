@@ -1781,36 +1781,91 @@ main, .fim { overflow-x: clip; }
 .servicos .container { position: relative; }
 .servicos .titulo-secao em { font-size: 45px; line-height: 1.5; }
 
+/* Acordeão de serviços: um card aberto por vez (classe .ativo, controlada pelo script.js).
+   No desktop os cards ficam lado a lado e o aberto se alarga; no celular, empilhados. */
 .servicos-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  container-type: inline-size; /* a largura do texto do card aberto é calculada a partir desta caixa */
+  display: flex;
   gap: 20px;
   margin-top: 40px;
 }
 .card-servico {
+  --aberto: 2.3; /* quanto o card aberto cresce em relação aos fechados */
+  --pad: 28px;
+  --ease: cubic-bezier(0.65, 0, 0.35, 1);
+  position: relative;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
-  padding: 32px;
+  justify-content: flex-end; /* tudo embaixo: o texto que aparece empurra o cabeçalho para cima */
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 456px; /* altura fixa: trocar de card não empurra a página */
+  padding: var(--pad);
+  overflow: hidden;
   border: 1px solid rgba(30, 33, 51, 0.1);
   border-radius: 20px;
   background: var(--branco);
+  cursor: pointer;
+  transition: flex-grow 0.6s var(--ease), border-color 0.4s, border-radius 0.4s, color 0.4s, translate 0.3s ease;
 }
+/* fundo azul do card aberto (degradê não anima: fica numa camada que aparece por opacidade) */
+.card-servico::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(161.67deg, #0f4c8f 0%, #0b3b73 55%, #082c57 100%);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+}
+.card-servico:not(.ativo):hover { translate: 0 -4px; border-color: rgba(10, 85, 174, 0.3); }
+.card-servico.ativo {
+  flex-grow: var(--aberto);
+  border-color: #0b3b73;
+  border-radius: 24px;
+  color: var(--branco);
+  cursor: default;
+}
+.card-servico.ativo::before { opacity: 1; }
+
 .card-servico__icone {
+  position: relative;
+  isolation: isolate;
   display: grid;
   place-items: center;
+  flex: none;
   width: 80px;
   height: 80px;
   border-radius: 24px;
-  background: linear-gradient(145deg, #f3f7fc, #e3ecf6);
+  background: var(--branco);
 }
-.card-servico__icone img { width: 34px; height: 34px; }
-.card-servico h3 {
-  margin-top: 20px;
+.card-servico__icone::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(145deg, #f3f7fc, #e3ecf6);
+  transition: opacity 0.5s var(--ease);
+}
+.card-servico.ativo .card-servico__icone::before { opacity: 0; }
+.card-servico__icone img { width: 34px; height: 34px; transition: scale 0.5s var(--ease); }
+.card-servico.ativo .card-servico__icone img { scale: 1.08; }
+
+.card-servico h3 { margin-top: 20px; }
+.card-servico__botao {
+  display: block;
+  width: 100%;
   font-weight: 600;
   font-size: 18px;
   line-height: 1.5;
+  text-align: left;
+  color: inherit;
+  cursor: inherit;
   text-box: trim-both cap alphabetic;
 }
+.card-servico__botao:focus-visible { outline: 2px solid currentColor; outline-offset: 6px; border-radius: 4px; }
 .card-servico__sub {
   margin-top: 14px;
   font-family: var(--fonte-serif);
@@ -1821,44 +1876,100 @@ main, .fim { overflow-x: clip; }
   line-height: 1.2;
   color: var(--azul);
   text-box: trim-both cap alphabetic;
+  transition: color 0.4s;
 }
+.card-servico.ativo .card-servico__sub { color: #8fd3ee; }
+
+/* "+" dos cards fechados, no canto de cima */
+.card-servico__sinal {
+  position: absolute;
+  top: var(--pad);
+  right: var(--pad);
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(10, 85, 174, 0.2);
+  border-radius: 50%;
+  transition: opacity 0.3s, scale 0.4s var(--ease), background-color 0.3s, border-color 0.3s;
+}
+.card-servico__sinal::before,
+.card-servico__sinal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 12px;
+  height: 2px;
+  margin: auto;
+  border-radius: 2px;
+  background: var(--azul);
+  transition: background-color 0.3s;
+}
+.card-servico__sinal::after { rotate: 90deg; }
+.card-servico:not(.ativo):hover .card-servico__sinal { border-color: var(--azul); background: var(--azul); }
+.card-servico:not(.ativo):hover .card-servico__sinal::before,
+.card-servico:not(.ativo):hover .card-servico__sinal::after { background: var(--branco); }
+.card-servico.ativo .card-servico__sinal { opacity: 0; scale: 0.4; }
+
+/* texto e tags: só no card aberto. A linha da grade vai de 0fr a 1fr (altura animada) */
+.card-servico__mais {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.5s var(--ease), opacity 0.2s;
+}
+.card-servico.ativo .card-servico__mais {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition: grid-template-rows 0.5s var(--ease), opacity 0.45s 0.25s;
+}
+.card-servico__mais > div {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  translate: 0 16px;
+  transition: translate 0.6s var(--ease);
+  /* largura final do card aberto, para o texto não ficar se reorganizando enquanto o card cresce */
+  width: calc((100cqw - 60px) * var(--aberto) / (3 + var(--aberto)) - 2 * var(--pad) - 2px);
+}
+.card-servico.ativo .card-servico__mais > div { translate: 0 0; }
 .card-servico__texto {
-  max-width: 345px; /* quebra as linhas nos mesmos pontos do Figma */
   margin-top: 30px;
   font-size: 16px;
   line-height: 1.5;
-  color: var(--texto-80);
+  color: rgba(255, 255, 255, 0.8);
   text-box: trim-both cap alphabetic;
 }
-/* tags sempre no pé do card, a pelo menos 30px do texto */
 .card-servico__tags {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: auto;
   padding-top: 30px;
   list-style: none;
 }
 .card-servico__tags li {
   padding: 7px 12px;
   border-radius: 999px;
-  background: var(--gelo);
+  background: rgba(255, 255, 255, 0.1);
   font-weight: 500;
   font-size: 12.5px;
   line-height: 1.5;
   white-space: nowrap;
   text-box: trim-both cap alphabetic;
 }
-.card-servico--destaque {
-  border-color: #0b3b73;
-  border-radius: 24px;
-  background: linear-gradient(161.67deg, #0f4c8f 0%, #0b3b73 55%, #082c57 100%);
-  color: var(--branco);
+
+/* telas entre 1024 e 1249px: cards fechados estreitos demais para "neuropsicológica" em 18px */
+@media (min-width: 1024px) and (max-width: 1249px) {
+  .card-servico { --aberto: 1.8; --pad: 22px; min-height: 500px; }
+  .card-servico__botao { font-size: 16px; }
 }
-.card-servico--destaque .card-servico__icone { background: var(--branco); }
-.card-servico--destaque .card-servico__sub { color: #8fd3ee; }
-.card-servico--destaque .card-servico__texto { color: rgba(255, 255, 255, 0.8); }
-.card-servico--destaque .card-servico__tags li { background: rgba(255, 255, 255, 0.1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .card-servico,
+  .card-servico *,
+  .card-servico::before,
+  .card-servico *::before,
+  .card-servico *::after { transition: none !important; }
+}
 
 .servicos-rodape {
   display: flex;
@@ -1880,11 +1991,21 @@ main, .fim { overflow-x: clip; }
   .servicos .cabecalho-duplo { align-items: center; text-align: center; }
   .servicos .titulo-secao em { font-size: calc(35em / 28); line-height: 1.56; }
 
-  .servicos-cards { grid-template-columns: 1fr; margin-top: 36px; }
-  .card-servico { padding: 28px 20px; }
-  .card-servico h3 { font-size: 20px; }
-  .card-servico__sub { font-size: 15px; }
-  .card-servico--destaque .card-servico__tags { padding-top: 20px; }
+  /* celular: cards empilhados; o cabeçalho fica em linha (ícone, título e "+") */
+  .servicos-cards { flex-direction: column; gap: 12px; margin-top: 36px; }
+  .card-servico,
+  .card-servico.ativo { flex: none; min-height: 0; padding: 20px; }
+  .card-servico:not(.ativo):hover { translate: none; }
+  .card-servico__cabeca { display: flex; align-items: center; gap: 16px; }
+  .card-servico__cabeca > div { flex: 1; min-width: 0; }
+  .card-servico__icone { width: 56px; height: 56px; border-radius: 18px; }
+  .card-servico__icone img { width: 26px; height: 26px; }
+  .card-servico h3 { margin-top: 0; }
+  .card-servico__sub { margin-top: 10px; font-size: 15px; }
+  .card-servico__sinal { position: relative; inset: auto; flex: none; width: 32px; height: 32px; }
+  .card-servico__mais > div { width: auto; }
+  .card-servico__texto { margin-top: 24px; }
+  .card-servico__tags { padding-top: 20px; }
 
   .servicos-rodape {
     flex-direction: column;

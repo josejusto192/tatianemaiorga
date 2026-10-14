@@ -1,6 +1,6 @@
 # Tatiane Maiorga — Psicologia e Neuropsicologia
 
-> Tatiane André Maiorga (CRP 06/141102) é psicóloga infantil e para adolescentes, especialista em Neuropsicologia, com atendimento presencial em Perdizes, São Paulo/SP, e online. Oferece psicoterapia com Terapia Cognitivo-Comportamental (TCC), avaliação neuropsicológica e reabilitação neuropsicológica, com a família orientada em cada etapa.
+> Tatiane André Maiorga (CRP 06/141102) é psicóloga infantil e para adolescentes, especialista em Neuropsicologia, com atendimento presencial em Perdizes, São Paulo/SP, e online. Oferece psicoterapia com Terapia Cognitivo-Comportamental (TCC), avaliação neuropsicológica, reabilitação neuropsicológica e orientação de pais, com a família orientada em cada etapa.
 
 O atendimento é para pais de crianças e adolescentes com dificuldades emocionais, de comportamento ou na escola: birras e crises, ansiedade e medos, atenção e aprendizagem, questões da adolescência (afastamento, tristeza, imagem corporal, telas, bullying) e mudanças na família (separação, luto, mudança de casa ou de escola, chegada de um irmão). Atende pré-escolares, escolares e adolescentes.
 
@@ -13,7 +13,7 @@ Para agendar: mandar uma mensagem pelo WhatsApp com a idade do filho, tirar as d
 - [Página inicial](https://tatianemaiorga.vercel.app/): apresentação, para quem é o atendimento e as situações mais comuns.
 - [Como funciona](https://tatianemaiorga.vercel.app/#como-funciona): os três passos, da primeira mensagem ao primeiro atendimento.
 - [Sobre a Tatiane](https://tatianemaiorga.vercel.app/#sobre-mim): formação, credenciais e forma de trabalho.
-- [Serviços](https://tatianemaiorga.vercel.app/#como-posso-ajudar): psicoterapia, avaliação e reabilitação neuropsicológica.
+- [Serviços](https://tatianemaiorga.vercel.app/#como-posso-ajudar): psicoterapia, avaliação e reabilitação neuropsicológica e orientação de pais.
 - [Onde atendo](https://tatianemaiorga.vercel.app/#onde-atendo): consultório em Perdizes (São Paulo/SP), mapa e atendimento online.
 - [Dúvidas frequentes](https://tatianemaiorga.vercel.app/#duvidas): valores, convênio, duração, presencial ou online e primeira sessão com crianças pequenas.
 
@@ -22,6 +22,7 @@ Para agendar: mandar uma mensagem pelo WhatsApp com a idade do filho, tirar as d
 - [Psicoterapia](https://tatianemaiorga.vercel.app/#como-posso-ajudar): para lidar com emoções e comportamento, com Terapia Cognitivo-Comportamental; com os pequenos, brincadeiras e jogos fazem parte do processo.
 - [Avaliação neuropsicológica](https://tatianemaiorga.vercel.app/#como-posso-ajudar): para entender atenção, aprendizagem e desenvolvimento; pode fazer parte da investigação de TDAH, TEA e dificuldades de aprendizagem.
 - [Reabilitação neuropsicológica](https://tatianemaiorga.vercel.app/#como-posso-ajudar): estratégias organizadas para o perfil da criança e os objetivos definidos com a família.
+- [Orientação de pais](https://tatianemaiorga.vercel.app/#como-posso-ajudar): encontros com pais e responsáveis para construir formas de agir em casa (rotina, limites e conversas do dia a dia).
 
 ## Contato
 

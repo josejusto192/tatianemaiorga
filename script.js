@@ -70,6 +70,38 @@ if (citacao) {
   }));
 }
 
+// Serviços: um card aberto por vez. Abre ao passar o mouse (com uma pequena espera, para não
+// trocar de card só de cruzar a linha), ao tocar ou ao focar pelo teclado; continua aberto ao sair.
+const cardsServico = [...document.querySelectorAll('.card-servico')];
+if (cardsServico.length) {
+  const comMouse = matchMedia('(hover: hover) and (pointer: fine)');
+  const semAnimacao = matchMedia('(prefers-reduced-motion: reduce)');
+  let espera;
+  const abrir = (card) => {
+    if (card.classList.contains('ativo')) return;
+    for (const c of cardsServico) {
+      const aberto = c === card;
+      c.classList.toggle('ativo', aberto);
+      c.querySelector('.card-servico__botao').setAttribute('aria-expanded', aberto);
+      c.querySelector('.card-servico__mais').inert = !aberto;
+    }
+    // no celular o card de cima fecha e puxa a página: quando a animação acaba, o aberto fica à vista
+    if (!comMouse.matches) {
+      setTimeout(() => card.scrollIntoView({ block: 'nearest', behavior: semAnimacao.matches ? 'auto' : 'smooth' }), 520);
+    }
+  };
+  for (const card of cardsServico) {
+    card.addEventListener('mouseenter', () => {
+      if (!comMouse.matches) return;
+      clearTimeout(espera);
+      espera = setTimeout(() => abrir(card), 110);
+    });
+    card.addEventListener('mouseleave', () => clearTimeout(espera));
+    card.addEventListener('click', () => abrir(card));
+    card.addEventListener('focusin', () => abrir(card));
+  }
+}
+
 // Entradas ao rolar: cada bloco aparece com um movimento suave quando entra na tela
 if (document.documentElement.classList.contains('revela')) {
   const grupos = {
